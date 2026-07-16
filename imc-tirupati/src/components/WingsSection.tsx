@@ -1,212 +1,247 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { WINGS_DATA } from "../data";
-import { Music, BookOpen, Gamepad2, Palette, Camera, Heart, Users, Clock, Calendar, ShieldAlert } from "lucide-react";
+import { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+// Ensure WINGS_DATA has: id, name, tagline, detailedDesc, activities, image, team
+import { WINGS_DATA } from "../data"; 
+import { 
+  Music, BookOpen, Gamepad2, Palette, Camera, Heart, 
+  Users, Clock, Sparkles, ArrowRight, CheckCircle2 
+} from "lucide-react";
 
-const getIconComponent = (name: string, className = "") => {
-  switch (name) {
-    case "Music":
-      return <Music className={className} />;
-    case "BookOpen":
-      return <BookOpen className={className} />;
-    case "Gamepad2":
-      return <Gamepad2 className={className} />;
-    case "Palette":
-      return <Palette className={className} />;
-    case "Camera":
-      return <Camera className={className} />;
-    case "Heart":
-      return <Heart className={className} />;
-    default:
-      return <Users className={className} />;
-  }
+/**
+ * THEME DEFINITIONS
+ * These keys MUST match the 'id' in your WINGS_DATA (case-insensitive check added below)
+ */
+const THEMES: Record<string, { 
+  color: string; 
+  glow: string; 
+  border: string; 
+  bg: string;
+  icon: any 
+}> = {
+  music: { 
+    color: "from-indigo-600 to-blue-500", 
+    glow: "rgba(79, 70, 229, 0.15)", 
+    border: "border-indigo-500/20", 
+    bg: "bg-indigo-500/5",
+    icon: Music 
+  },
+  books: { 
+    color: "from-amber-600 to-orange-500", 
+    glow: "rgba(217, 119, 6, 0.15)", 
+    border: "border-amber-500/20", 
+    bg: "bg-amber-500/5",
+    icon: BookOpen 
+  },
+  games: { 
+    color: "from-rose-600 to-pink-500", 
+    glow: "rgba(225, 29, 72, 0.15)", 
+    border: "border-rose-500/20", 
+    bg: "bg-rose-500/5",
+    icon: Gamepad2 
+  },
+  craft: { 
+    color: "from-emerald-600 to-teal-500", 
+    glow: "rgba(5, 150, 105, 0.15)", 
+    border: "border-emerald-500/20", 
+    bg: "bg-emerald-500/5",
+    icon: Palette 
+  },
+  photo: { 
+    color: "from-cyan-600 to-sky-500", 
+    glow: "rgba(8, 145, 178, 0.15)", 
+    border: "border-cyan-500/20", 
+    bg: "bg-cyan-500/5",
+    icon: Camera 
+  },
+  social: { 
+    color: "from-purple-600 to-fuchsia-500", 
+    glow: "rgba(147, 51, 234, 0.15)", 
+    border: "border-purple-500/20", 
+    bg: "bg-purple-500/5",
+    icon: Heart 
+  },
 };
 
 export default function WingsSection() {
-  const [selectedWingId, setSelectedWingId] = useState("music");
-  const activeWing = WINGS_DATA.find((w) => w.id === selectedWingId) || WINGS_DATA[0];
+  // Initialize with the ID of your first wing from data
+  const [selectedWingId, setSelectedWingId] = useState(WINGS_DATA[0]?.id || "music");
+  
+  // Safe Theme Lookup Helper
+  const getTheme = (id: string) => {
+    const key = id.toLowerCase();
+    return THEMES[key] || THEMES.music; // Fallback to music theme if ID not found
+  };
+
+  const activeWing = useMemo(() => 
+    WINGS_DATA.find((w) => w.id === selectedWingId) || WINGS_DATA[0], 
+    [selectedWingId]
+  );
+
+  const theme = getTheme(activeWing.id);
 
   return (
-    <section id="wings" className="py-20 md:py-32 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900/80 relative transition-colors duration-300">
-      {/* Dynamic Background Glow based on active wing's colors */}
-      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none transition-all duration-700 bg-radial-gradient-glow" style={{
-        backgroundImage: `radial-gradient(circle at 50% 30%, var(--wing-glow-color, rgba(249, 115, 22, 0.15)) 0%, transparent 70%)`
-      }} />
+    <section id="wings" className="py-24 md:py-36 bg-white dark:bg-[#050505] relative overflow-hidden transition-colors duration-700">
+      
+      {/* 1. Dynamic Ambient Atmosphere */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-in-out"
+        style={{
+          background: `radial-gradient(circle at 50% 20%, ${theme.glow} 0%, transparent 50%)`
+        }}
+      />
+      
+      {/* Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none grayscale" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <span className="text-xs font-bold tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
-            Our Six Wings / Clubs
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-display leading-tight">
-            One Community. <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">Six Passions.</span>
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <motion.span 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className={`inline-block text-[10px] font-black tracking-[0.3em] uppercase mb-4 px-4 py-1.5 rounded-full border ${theme.border} bg-white dark:bg-slate-900 shadow-sm transition-colors duration-500`}
+          >
+            Explore Your Passions
+          </motion.span>
+          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white leading-[1.1] mb-6">
+            The Six <span className={`bg-gradient-to-r ${theme.color} bg-clip-text text-transparent transition-all duration-500`}>Wings</span> of IMC.
           </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto" />
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-light font-sans">
-            Find your space. Meet your people. Currently featuring six diverse wings tailored to spark your creativity, and let you step outside of your regular routine.
+          <p className="text-slate-500 dark:text-slate-400 text-lg font-medium leading-relaxed">
+            Every club is a community within itself. Choose a wing to see how we spend our weekends.
           </p>
         </div>
 
-        {/* Wings Selection Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+        {/* 2. Modern Wing Selector */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
           {WINGS_DATA.map((wing) => {
             const isSelected = wing.id === selectedWingId;
+            const wingTheme = getTheme(wing.id);
+            const WingIcon = wingTheme.icon || Users;
+            
             return (
-              <motion.button
+              <button
                 key={wing.id}
                 onClick={() => setSelectedWingId(wing.id)}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.05, 
-                  boxShadow: "0 20px 25px -5px rgba(249, 115, 22, 0.15), 0 10px 10px -5px rgba(249, 115, 22, 0.1)"
-                }}
-                whileTap={{ scale: 0.97 }}
-                className={`p-6 rounded-2xl border text-left flex flex-col justify-between h-48 transition-all duration-300 relative overflow-hidden group ${
-                  isSelected
-                    ? `bg-gradient-to-br ${wing.accentColor} text-white border-transparent shadow-2xl`
-                    : "bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 hover:border-orange-500/20"
+                className={`relative px-6 py-4 rounded-2xl flex items-center gap-3 transition-all duration-300 group ${
+                  isSelected ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
                 }`}
               >
-                {/* Decorative subtle background icon */}
-                <div className="absolute -right-4 -bottom-4 opacity-10 text-white transition-transform group-hover:scale-110 duration-300">
-                  {getIconComponent(wing.iconName, "w-24 h-24")}
-                </div>
-
-                {/* Icon Badge */}
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                  isSelected ? "bg-white/20 text-white" : "bg-slate-100 dark:bg-slate-800/80 text-orange-500 dark:text-orange-400 group-hover:text-white transition-colors"
-                }`}>
-                  {getIconComponent(wing.iconName, "w-5 h-5")}
-                </div>
-
-                {/* Text info */}
-                <div className="space-y-1 relative z-10 mt-6">
-                  <h3 className="text-sm font-bold tracking-tight uppercase font-display leading-none">
-                    {wing.name}
-                  </h3>
-                  <p className={`text-[11px] leading-tight line-clamp-2 ${
-                    isSelected ? "text-white/80" : "text-slate-500 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-400"
-                  }`}>
-                    {wing.tagline}
-                  </p>
-                </div>
-              </motion.button>
+                {isSelected && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className={`absolute inset-0 bg-gradient-to-r ${wingTheme.color} rounded-2xl shadow-xl shadow-indigo-500/20`}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">
+                  <WingIcon size={20} className={isSelected ? "animate-pulse" : "opacity-70 group-hover:opacity-100"} />
+                </span>
+                <span className="relative z-10 font-bold text-sm tracking-wide uppercase">
+                  {wing.name}
+                </span>
+              </button>
             );
           })}
         </div>
 
-        {/* Selected Wing Details Card */}
+        {/* 3. Main Content Display */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedWingId}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4 }}
-            className="bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-900 rounded-3xl overflow-hidden shadow-2xl relative transition-colors duration-300"
+            initial={{ opacity: 0, scale: 0.98, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 1.02, y: -20 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8"
           >
-            {/* Header banner area within card */}
-            <div className={`p-8 md:p-12 bg-gradient-to-r ${activeWing.accentColor} text-white relative overflow-hidden`}>
-              <div className="absolute -right-16 -top-16 opacity-10">
-                {getIconComponent(activeWing.iconName, "w-64 h-64")}
-              </div>
-              <div className="relative z-10 max-w-3xl space-y-3">
-                <span className="inline-flex items-center space-x-1.5 bg-white/20 border border-white/10 px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase font-sans">
-                  Active Club Space
-                </span>
-                <h3 className="text-3xl md:text-5xl font-black tracking-tight font-display">
-                  {activeWing.name}
-                </h3>
-                <p className="text-sm sm:text-base md:text-lg text-white/90 italic font-light font-sans max-w-xl">
-                  "{activeWing.tagline}"
-                </p>
+            {/* Image Side */}
+            <div className="lg:col-span-5 group relative">
+              <div className={`absolute -inset-4 bg-gradient-to-r ${theme.color} opacity-20 blur-3xl rounded-[3rem] transition-all duration-700`} />
+              <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/20 dark:border-slate-800 shadow-2xl">
+                <img
+                  src={activeWing.image}
+                  alt={activeWing.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-8 left-8 right-8">
+                   <div className="flex items-center gap-2 mb-2">
+                     <Sparkles size={16} className="text-yellow-400" />
+                     <span className="text-xs font-bold text-white/70 uppercase tracking-widest">Featured Event</span>
+                   </div>
+                   <h4 className="text-2xl font-bold text-white mb-2">Capturing {activeWing.name}</h4>
+                   <p className="text-sm text-white/60 line-clamp-2">Authentic moments from our last meetup in Tirupati.</p>
+                </div>
               </div>
             </div>
 
-            {/* Inner Content Grid */}
-            <div className="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-              
-              {/* About & Programs - left */}
-              <div className="lg:col-span-7 space-y-8 text-left">
-                {/* About Section */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-black tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
-                    About The Club
-                  </h4>
-                  <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 font-light leading-relaxed font-sans">
-                    {activeWing.detailedDesc}
-                  </p>
+            {/* Content Side */}
+            <div className="lg:col-span-7 flex flex-col justify-center space-y-10 lg:pl-8">
+              <div className="space-y-4">
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${theme.color} flex items-center justify-center text-white shadow-lg`}>
+                  <theme.icon size={28} />
                 </div>
-
-                {/* Specific Program Highlights */}
-                <div className="space-y-4">
-                  <h4 className="text-xs font-black tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
-                    Specific Program Highlights
-                  </h4>
-                  <div className="space-y-4">
-                    {activeWing.activities.map((act, i) => (
-                      <div key={i} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-900 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 group/item transition-colors duration-300">
-                        <div className="space-y-1">
-                          <h5 className="text-sm font-bold text-slate-800 dark:text-white font-display group-hover/item:text-orange-500 dark:group-hover/item:text-orange-400 transition-colors">
-                            {act.title}
-                          </h5>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-sans">
-                            {act.description}
-                          </p>
-                        </div>
-                        <div className="shrink-0 flex items-center space-x-1.5 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 dark:text-slate-400 transition-colors duration-300">
-                          <Clock size={12} className="text-orange-500 dark:text-orange-400" />
-                          <span>{act.frequency}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                  {activeWing.name} <span className="text-slate-300 dark:text-slate-700 font-light">/</span> {activeWing.tagline}
+                </h3>
+                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                  {activeWing.detailedDesc}
+                </p>
               </div>
 
-              {/* Team Overview & Image - right */}
-              <div className="lg:col-span-5 space-y-8 text-left">
-                {/* High-quality Representative Image */}
-                <div className="rounded-2xl overflow-hidden aspect-video lg:aspect-[4/3] shadow-2xl relative border border-slate-200 dark:border-slate-800">
-                  <img
-                    src={activeWing.image}
-                    alt={activeWing.name}
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
-                  <div className="absolute bottom-4 left-4 flex items-center space-x-2 text-[10px] font-bold tracking-wider text-white uppercase font-sans">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span>Real Event Photograph</span>
-                  </div>
-                </div>
-
-                {/* Team Overview */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-black tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
-                    Team Overview
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {activeWing.team.map((leader, idx) => (
-                      <div key={idx} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-900 flex items-center space-x-3.5 transition-colors duration-300">
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${activeWing.accentColor} flex items-center justify-center font-bold text-white text-sm font-display shadow-md`}>
-                          {leader.name.split(" ").map(n => n[0]).join("")}
-                        </div>
-                        <div>
-                          <h5 className="text-sm font-bold text-slate-850 dark:text-white font-sans leading-none">{leader.name}</h5>
-                          <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 leading-none font-sans font-light">{leader.role}</p>
+              {/* Program Highlights Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {activeWing.activities.map((act, i) => (
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    key={i} 
+                    className="p-5 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:border-white/20 transition-all group/card"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={`mt-1 rounded-full p-1 bg-gradient-to-r ${theme.color}`}>
+                        <CheckCircle2 size={14} className="text-white" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-slate-900 dark:text-white mb-1 group-hover/card:translate-x-1 transition-transform">{act.title}</h5>
+                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-tight">
+                          <Clock size={10} />
+                          {act.frequency}
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
+              {/* Action Footer */}
+              <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex -space-x-3">
+                  {activeWing.team.map((leader, idx) => (
+                    <div 
+                      key={idx}
+                      title={`${leader.name} - ${leader.role}`}
+                      className={`w-12 h-12 rounded-full border-4 border-white dark:border-[#050505] bg-gradient-to-br ${theme.color} flex items-center justify-center text-white font-bold text-xs shadow-lg`}
+                    >
+                      {leader.name[0]}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">Curated by the Wing Leads</p>
+                  <p className="text-xs text-slate-500 mt-1">Passionate experts in {activeWing.name.toLowerCase()}</p>
+                </div>
+                <button className={`flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:scale-105 active:scale-95 transition-all`}>
+                  Join Wing <ArrowRight size={16} />
+                </button>
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
-
       </div>
     </section>
   );

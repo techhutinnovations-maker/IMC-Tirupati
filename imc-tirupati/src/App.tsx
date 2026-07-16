@@ -10,6 +10,8 @@ import FAQSection from "./components/FAQSection";
 import ContactSection from "./components/ContactSection";
 import GalleryPage from "./components/GalleryPage";
 import Footer from "./components/Footer";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
+
 
 export default function App() {
   const [view, setView] = useState<"home" | "gallery">("home");
@@ -119,7 +121,8 @@ export default function App() {
 
   return (
     <div className="bg-slate-50 dark:bg-slate-950 min-h-screen text-slate-900 dark:text-slate-100 font-sans selection:bg-orange-500 selection:text-white transition-colors duration-300">
-      
+            <FloatingWhatsApp />
+
       {/* If view is gallery, we render the standalone Gallery page with its custom header */}
       {view === "gallery" ? (
         <GalleryPage onBackToHome={() => handleNavigate("home")} theme={theme} onToggleTheme={toggleTheme} />
@@ -138,7 +141,7 @@ export default function App() {
           <WingsSection />
 
           {/* Upcoming Events Section with RSVP */}
-          <EventsSection onJoinClick={handleJoinEvent} />
+          {/* <EventsSection onJoinClick={handleJoinEvent} /> */}
 
           {/* Summary / Fast Preview of the Gallery Section with a CTA to open standalone Gallery */}
           <GallerySection onExploreStandalone={() => handleNavigate("gallery")} />

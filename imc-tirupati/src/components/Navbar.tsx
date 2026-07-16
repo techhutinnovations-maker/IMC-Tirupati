@@ -1,39 +1,35 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Users, Sun, Moon } from "lucide-react";
 
-interface NavbarProps {
-  activeSection: string;
-  onNavigate: (sectionId: string) => void;
-  theme: "dark" | "light";
-  onToggleTheme: () => void;
-}
-
-export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme }: NavbarProps) {
+export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
     { name: "Our Wings", id: "wings" },
-    { name: "Events", id: "events" },
     { name: "Gallery", id: "gallery" },
     { name: "Contact", id: "contact" }
   ];
 
-  const handleLinkClick = (id: string) => {
+  const handleLinkClick = (id) => {
     onNavigate(id);
     setIsOpen(false);
   };
@@ -46,28 +42,31 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => handleLinkClick("home")}>
-            <div className="flex items-center space-x-2">
-              <span className="text-2xl md:text-3xl font-extrabold tracking-wider bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 bg-clip-text text-transparent filter drop-shadow-md font-display">
+          <button
+            className="flex-shrink-0 flex items-center cursor-pointer min-w-0"
+            onClick={() => handleLinkClick("home")}
+          >
+            <div className="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
+              <span className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 bg-clip-text text-transparent filter drop-shadow-md font-display shrink-0">
                 IMC
               </span>
-              <div className="hidden sm:block border-l border-slate-300 dark:border-slate-800 h-6 mx-2" />
-              <div className="hidden sm:flex flex-col">
-                <span className="text-xs font-bold text-slate-900 dark:text-white tracking-widest leading-none font-sans uppercase">
+              <div className="hidden sm:block border-l border-slate-300 dark:border-slate-800 h-6 mx-2 shrink-0" />
+              <div className="hidden sm:flex flex-col min-w-0">
+                <span className="text-xs font-bold text-slate-900 dark:text-white tracking-widest leading-none font-sans uppercase truncate">
                   Tirupati
                 </span>
-                <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium tracking-tight">
+                <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium tracking-tight truncate">
                   IT'S MY COMMUNITY
                 </span>
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <button
                 key={link.id}
@@ -84,16 +83,9 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
             ))}
           </div>
 
-          {/* Call to Action Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Theme Toggle Button */}
-            <button
-              onClick={onToggleTheme}
-              className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 hover:border-orange-500/30 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-sm"
-              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
+          {/* Desktop right-side actions */}
+          <div className="hidden lg:flex items-center space-x-4">
+            
 
             <a
               href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
@@ -113,31 +105,24 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
             </button>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-2">
-            {/* Mobile Theme Toggle Button */}
+          {/* Mobile / tablet controls — kept minimal so the bar never crowds on narrow screens */}
+          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2">
             <button
               onClick={onToggleTheme}
-              className="p-2 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-500 transition-colors"
+              className="p-2 sm:p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-500 transition-colors"
               title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
-            <a
-              href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
-              target="_blank"
-              rel="noreferrer"
-              className="text-slate-500 dark:text-slate-400 hover:text-orange-500 p-2"
-            >
-              <Instagram size={18} />
-            </a>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-slate-500 dark:text-slate-400 hover:text-orange-500 p-2 focus:outline-none"
-              aria-label="Toggle menu"
+              className="p-2 sm:p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:text-orange-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -145,28 +130,41 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-900 px-4 pt-2 pb-6 space-y-2 shadow-xl">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleLinkClick(link.id)}
-              className={`block w-full text-left px-3 py-3 rounded-lg text-base font-medium transition-colors ${
-                activeSection === link.id
-                  ? "bg-orange-500/10 text-orange-600 dark:text-orange-400 font-semibold"
-                  : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900"
-              }`}
-            >
-              {link.name}
-            </button>
-          ))}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-900 flex flex-col space-y-3 px-3">
-            <button
-              onClick={() => handleLinkClick("contact")}
-              className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-3 px-4 rounded-xl text-sm tracking-wider uppercase shadow-md"
-            >
-              <Users size={16} />
-              <span>Join Community</span>
-            </button>
+        <div className="lg:hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-900 shadow-xl max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="px-4 pt-3 pb-6 space-y-1.5">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => handleLinkClick(link.id)}
+                className={`block w-full text-left px-4 py-3.5 rounded-lg text-base font-medium transition-colors ${
+                  activeSection === link.id
+                    ? "bg-orange-500/10 text-orange-600 dark:text-orange-400 font-semibold"
+                    : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900"
+                }`}
+              >
+                {link.name}
+              </button>
+            ))}
+
+            <div className="pt-4 border-t border-slate-200 dark:border-slate-900 flex flex-col gap-3 px-1">
+              <button
+                onClick={() => handleLinkClick("contact")}
+                className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold py-3.5 px-4 rounded-xl text-sm tracking-wider uppercase shadow-md active:scale-95 transition-transform"
+              >
+                <Users size={16} />
+                <span>Join Community</span>
+              </button>
+
+              <a
+                href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
+                target="_blank"
+                rel="noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+              >
+                <Instagram size={16} />
+                <span>@imc.tirupati</span>
+              </a>
+            </div>
           </div>
         </div>
       )}

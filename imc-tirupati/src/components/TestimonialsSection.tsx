@@ -1,184 +1,221 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { Quote, Star, MessageSquare, ArrowRight } from "lucide-react";
 import { TESTIMONIALS } from "../data";
-import { Quote, ChevronLeft, ChevronRight, MessageSquare } from "lucide-react";
 
-export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
+// Helper to split testimonials into two compact rows
+const row1 = TESTIMONIALS.slice(0, 6);
+const row2 = TESTIMONIALS.slice(6, 12);
 
-  // Auto-play effect
-  useEffect(() => {
-    if (!isHovered) {
-      autoplayTimerRef.current = setInterval(() => {
-        handleNext();
-      }, 5000); // 5 seconds autoplay
-    }
+const TiltCard = ({ testimonial }: { testimonial: typeof TESTIMONIALS[0] }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-    return () => {
-      if (autoplayTimerRef.current) {
-        clearInterval(autoplayTimerRef.current);
-      }
-    };
-  }, [currentIndex, isHovered]);
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % TESTIMONIALS.length);
+  // Map mouse position to rotation (Max 15 degrees tilt)
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  // Reflection/Shine effect following the mouse
+  const shineOpacity = useTransform(mouseYSpring, [-0.5, 0.5], [0, 0.3]);
+  const shineX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Calculate normalized value between -0.5 and 0.5
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
   };
-
-  const currentTestimonial = TESTIMONIALS[currentIndex];
 
   return (
-    <section
-      id="testimonials"
-      className="py-20 md:py-32 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 relative overflow-hidden transition-colors duration-300"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className="relative w-[340px] shrink-0 p-8 mx-4 rounded-[2.5rem] 
+                 bg-white dark:bg-white/[0.04] backdrop-blur-2xl
+                 border border-slate-200 dark:border-white/10 
+                 hover:border-orange-500/50 transition-colors duration-500 group cursor-grab active:cursor-grabbing"
     >
-      {/* Visual background decorations */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-3xl -z-10 pointer-events-none animate-pulse" />
+      {/* Dynamic Shine Effect */}
+      <motion.div
+        style={{ opacity: shineOpacity, left: shineX }}
+        className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-r from-transparent via-white to-transparent skew-x-12"
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-bold tracking-widest text-orange-400 uppercase font-sans flex items-center justify-center space-x-1.5">
-            <MessageSquare size={12} className="text-orange-500" />
-            <span>Community Voices</span>
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-display leading-tight">
-            Loved by the <span className="bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">Tirupati Tribe.</span>
-          </h2>
-          <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto" />
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-light font-sans max-w-xl mx-auto">
-            Read first-hand accounts of how our interest-based clubs have helped local people escape monotony and find genuine connection.
-          </p>
+      <div style={{ transform: "translateZ(50px)" }} className="relative z-10">
+        <div className="flex items-center gap-1 mb-4">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={12} className="fill-orange-500 text-orange-500" />
+          ))}
         </div>
 
-        {/* Carousel Container */}
-        <div className="relative" id="testimonial-carousel">
+        <p className="text-slate-700 dark:text-slate-200 text-base leading-relaxed mb-6 italic whitespace-normal">
+          "{testimonial.quote}"
+        </p>
+
+        <div className="flex items-center gap-4 pt-5 border-t border-slate-100 dark:border-white/5">
+          <img
+            src={testimonial.avatar}
+            alt={testimonial.author}
+            className="w-12 h-12 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 border-2 border-orange-500/20"
+          />
+          <div className="flex-1 min-w-0">
+            <h4 className="text-sm font-black text-slate-900 dark:text-white truncate">
+              {testimonial.author}
+            </h4>
+            <p className="text-[10px] text-orange-600 dark:text-orange-400 font-bold uppercase tracking-[0.15em] mt-1">
+              {testimonial.role}
+            </p>
+          </div>
+          <Quote size={24} className="text-slate-100 dark:text-white/5 shrink-0" />
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const MarqueeRow = ({ items, direction = "left", speed = 50 }: { items: any[], direction?: "left" | "right", speed?: number }) => {
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  return (
+    <div 
+      className="flex overflow-hidden perspective-1000 py-10"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <motion.div
+        animate={{ x: isPaused ? undefined : (direction === "left" ? [0, -1800] : [-1800, 0]) }}
+        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+        className="flex whitespace-nowrap"
+      >
+        {[...items, ...items, ...items].map((t, idx) => (
+          <TiltCard key={idx} testimonial={t} />
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+export default function TestimonialsSection() {
+  return (
+    <section className="relative min-h-screen py-24 flex flex-col justify-center bg-slate-50 dark:bg-[#050505] overflow-hidden transition-colors">
+      
+      {/* Animated Background Gradients */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-orange-500/10 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-rose-500/10 rounded-full blur-[120px]" 
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="text-center mb-12 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-xl"
+          >
+            <MessageSquare size={14} className="text-orange-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+              Community Love
+            </span>
+          </motion.div>
           
-          {/* Main Card with AnimatePresence */}
-          <div className="relative min-h-[320px] sm:min-h-[260px] bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-md flex flex-col justify-between">
-            <div className="absolute top-8 right-8 text-slate-300/60 dark:text-slate-800/40 pointer-events-none">
-              <Quote size={56} className="rotate-180" />
-            </div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white tracking-tighter leading-[0.9]"
+          >
+            JOIN THE <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-rose-500 to-orange-600">
+              TIRUPATI TRIBE.
+            </span>
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-lg md:text-xl text-slate-500 dark:text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed"
+          >
+            Move your mouse over the cards to experience the depth of our community. 
+            Real feedback from local hobbyists.
+          </motion.p>
+        </div>
 
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-                className="space-y-6 text-left"
-              >
-                {/* Quote Text */}
-                <p className="text-lg sm:text-xl md:text-2xl font-light text-slate-700 dark:text-slate-200 leading-relaxed font-sans italic">
-                  "{currentTestimonial.quote}"
-                </p>
+        {/* Marquee with Tilt Cards */}
+        <div className="relative">
+          {/* Cinematic Side Masks */}
+          <div className="absolute inset-y-0 left-0 w-32 md:w-64 bg-gradient-to-r from-slate-50 dark:from-[#050505] to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-32 md:w-64 bg-gradient-to-l from-slate-50 dark:from-[#050505] to-transparent z-20 pointer-events-none" />
+          
+          <MarqueeRow items={row1} direction="left" speed={60} />
+          <MarqueeRow items={row2} direction="right" speed={80} />
+        </div>
 
-                {/* Author Info */}
-                <div className="flex items-center space-x-4 pt-4 border-t border-slate-200">
-                  <div className="relative shrink-0">
-                    <img
-                      src={currentTestimonial.avatar}
-                      alt={currentTestimonial.author}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-orange-500/30"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 rounded-full shadow-inner" />
-                  </div>
-                  <div>
-                    <h4 className="text-base font-bold text-slate-900 dark:text-white font-display">
-                      {currentTestimonial.author}
-                    </h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 font-sans">
-                      {currentTestimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Carousel Navigation Buttons (Desktop only overlay) */}
-          <div className="absolute inset-y-0 -left-16 right-auto hidden md:flex items-center">
-            <button
-              onClick={handlePrev}
-              className="p-3 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-400 hover:scale-110 active:scale-95 transition-all shadow-xl hover:border-orange-500/20 cursor-pointer"
-              aria-label="Previous testimonial"
-              id="testimonial-prev-btn"
-            >
-              <ChevronLeft size={20} />
-            </button>
-          </div>
-
-          <div className="absolute inset-y-0 -right-16 left-auto hidden md:flex items-center">
-            <button
-              onClick={handleNext}
-              className="p-3 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-400 hover:scale-110 active:scale-95 transition-all shadow-xl hover:border-orange-500/20 cursor-pointer"
-              aria-label="Next testimonial"
-              id="testimonial-next-btn"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-
-          {/* Mobile navigation row */}
-          <div className="flex md:hidden items-center justify-between mt-6 px-2">
-            <button
-              onClick={handlePrev}
-              className="p-2.5 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-400 transition-colors cursor-pointer"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={16} />
-            </button>
-
-            {/* Pagination dots (Shared) */}
-            <div className="flex space-x-2" id="testimonial-dots">
-              {TESTIMONIALS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentIndex === idx ? "w-6 bg-gradient-to-r from-orange-500 to-amber-500" : "w-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
+        {/* Action Footer */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-16 flex flex-col items-center gap-8"
+        >
+          <div className="flex items-center gap-4 px-6 py-3 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10">
+            <div className="flex -space-x-3">
+              {TESTIMONIALS.slice(0, 4).map((t, i) => (
+                <img key={i} src={t.avatar} className="w-10 h-10 rounded-full border-4 border-slate-50 dark:border-[#050505] shadow-lg" alt="" />
               ))}
             </div>
-
-            <button
-              onClick={handleNext}
-              className="p-2.5 rounded-full bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-400 transition-colors cursor-pointer"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={16} />
-            </button>
+            <p className="text-sm font-black text-slate-900 dark:text-white">
+              +500 Members Strong
+            </p>
           </div>
 
-          {/* Desktop Pagination dots below card */}
-          <div className="hidden md:flex justify-center space-x-2 mt-8">
-            {TESTIMONIALS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  currentIndex === idx ? "w-8 bg-gradient-to-r from-orange-500 to-amber-500" : "w-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700"
-                }`}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-        </div>
+          <button className="group relative flex items-center gap-3 px-10 py-5 bg-orange-500 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-orange-600 transition-all duration-300 shadow-2xl shadow-orange-500/20">
+            Apply to Join the Tribe
+            <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+          </button>
+        </motion.div>
 
       </div>
+
+      {/* Tailwind helper classes for perspective */}
+      <style jsx>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+      `}</style>
     </section>
   );
 }

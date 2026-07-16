@@ -1,25 +1,56 @@
 import { motion } from "motion/react";
-import { Instagram, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { Instagram, ArrowUpRight, Sparkles } from "lucide-react";
 
 export default function AboutSection() {
   const highlights = [
     {
       title: "Interest-Based Wings",
-      desc: "Six dedicated clubs (Music, Books, Games, Craft, Photo, Social) to suit your unique creativity."
+      desc: "Six dedicated clubs — Music, Books, Games, Craft, Photo, Social — to suit your unique creativity.",
+      accent: "orange"
     },
     {
       title: "Break the Regular Routine",
-      desc: "Weekend activities, treks, jamming, and workshops designed to escape your regular schedule."
+      desc: "Weekend activities, treks, jamming, and workshops designed to escape your regular schedule.",
+      accent: "purple"
     },
     {
       title: "Build Meaningful Connections",
-      desc: "Meet empathetic, progressive, and friendly like-minded individuals in an open community."
+      desc: "Meet empathetic, progressive, and friendly like-minded individuals in an open community.",
+      accent: "emerald"
     },
     {
       title: "Tirupati-Centric Gatherings",
-      desc: "Local, organic meetups celebrating the beauty, heritage, and people of Tirupati."
+      desc: "Local, organic meetups celebrating the beauty, heritage, and people of Tirupati.",
+      accent: "indigo"
     }
   ];
+
+  const accentStyles: Record<string, { ring: string; dot: string; text: string; bg: string }> = {
+    orange: {
+      ring: "group-hover:border-orange-400/50",
+      dot: "bg-orange-500",
+      text: "text-orange-600 dark:text-orange-400",
+      bg: "bg-orange-500/10"
+    },
+    purple: {
+      ring: "group-hover:border-purple-400/50",
+      dot: "bg-purple-500",
+      text: "text-purple-600 dark:text-purple-400",
+      bg: "bg-purple-500/10"
+    },
+    emerald: {
+      ring: "group-hover:border-emerald-400/50",
+      dot: "bg-emerald-500",
+      text: "text-emerald-600 dark:text-emerald-400",
+      bg: "bg-emerald-500/10"
+    },
+    indigo: {
+      ring: "group-hover:border-indigo-400/50",
+      dot: "bg-indigo-500",
+      text: "text-indigo-600 dark:text-indigo-400",
+      bg: "bg-indigo-500/10"
+    }
+  };
 
   return (
     <section id="about" className="py-20 md:py-32 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 relative overflow-hidden transition-colors duration-300">
@@ -29,79 +60,123 @@ export default function AboutSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Side: Modern Image Collage */}
-          <div className="lg:col-span-5 space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+
+          {/* Left Side: Scrapbook-style photo stack */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative h-[420px] sm:h-[480px] lg:h-[520px] max-w-md mx-auto lg:mx-0">
+
+              {/* Back photo — rotated left */}
               <motion.div
-                whileHover={{ y: -5 }}
-                className="rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl relative group"
+                initial={{ opacity: 0, y: 30, rotate: -10 }}
+                whileInView={{ opacity: 1, y: 0, rotate: -8 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6 }}
+                whileHover={{ rotate: -3, scale: 1.03 }}
+                className="absolute top-0 left-0 w-[60%] aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-900 z-10"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 z-10" />
                 <img
                   src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=400&q=80"
                   alt="Singing together"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
-              <div className="space-y-4 pt-8">
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="rounded-3xl overflow-hidden aspect-square shadow-2xl relative group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 z-10" />
-                  <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80"
-                    alt="Board Games"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                </motion.div>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl relative group"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60 z-10" />
-                  <img
-                    src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=400&q=80"
-                    alt="Laughter"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                </motion.div>
-              </div>
+
+              {/* Front photo — rotated right, layered on top */}
+              <motion.div
+                initial={{ opacity: 0, y: 30, rotate: 10 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 6 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                whileHover={{ rotate: 2, scale: 1.03 }}
+                className="absolute bottom-0 right-0 w-[65%] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 z-20"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=500&q=80"
+                  alt="Laughter and community"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </motion.div>
+
+              {/* Small accent photo, top right */}
+              <motion.div
+                initial={{ opacity: 0, y: -20, rotate: 6 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 4 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ rotate: 0, scale: 1.05 }}
+                className="absolute top-4 right-2 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-900 z-30"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=300&q=80"
+                  alt="Board games night"
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </motion.div>
+
+              {/* Floating stat badge — signature element */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: 0.35, type: "spring" }}
+                className="absolute bottom-6 left-2 sm:left-0 z-40 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 px-5 py-4 flex items-center gap-3"
+              >
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shrink-0">
+                  <Sparkles size={16} className="text-white" />
+                </div>
+                <div className="leading-tight">
+                  <div className="text-lg font-extrabold text-slate-900 dark:text-white font-display">6 Wings</div>
+                  <div className="text-[10px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">One Community</div>
+                </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Right Side: Copy & Content */}
           <div className="lg:col-span-7 space-y-8 text-left">
             <div className="space-y-4">
-              <span className="text-xs font-bold tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-orange-500 dark:text-orange-400 uppercase font-sans">
+                <span className="w-6 h-px bg-orange-500 dark:bg-orange-400" />
                 About IMC Tirupati
               </span>
               <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-display leading-tight">
                 More Than a Community. <br />
                 It's Where You <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">Belong.</span>
               </h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full" />
             </div>
 
-            <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-light leading-relaxed font-sans">
-              It's My Community (IMC) Tirupati is a vibrant, community-driven platform created to bring people together beyond their everyday schedules. Through our dedicated interest-based clubs, experiential weekend trips, hands-on masterclasses, and social initiatives, we cultivate open spaces where people freely learn new creative hobbies, exchange unique stories, and nurture authentic, long-term friendships.
+            <p className="text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-medium leading-relaxed font-sans max-w-2xl">
+              A vibrant, community-driven platform built to bring people together beyond their everyday schedules.
+            </p>
+
+            <p className="text-base text-slate-600 dark:text-slate-400 font-light leading-relaxed font-sans max-w-2xl">
+              Through our dedicated interest-based clubs, experiential weekend trips, hands-on masterclasses, and social initiatives, we cultivate open spaces where people freely learn new creative hobbies, exchange unique stories, and nurture authentic, long-term friendships.
             </p>
 
             {/* highlights list */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {highlights.map((item, idx) => (
-                <div key={idx} className="flex items-start space-x-3 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-900 transition-colors duration-300">
-                  <CheckCircle2 className="text-orange-500 dark:text-orange-400 shrink-0 mt-0.5" size={18} />
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-800 dark:text-white font-display">{item.title}</h4>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed font-sans">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {highlights.map((item, idx) => {
+                const accent = accentStyles[item.accent];
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-60px" }}
+                    transition={{ duration: 0.4, delay: idx * 0.08 }}
+                    className={`group flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 ${accent.ring}`}
+                  >
+                    <span className={`w-2 h-2 rounded-full mt-2 shrink-0 ${accent.dot}`} />
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-800 dark:text-white font-display">{item.title}</h4>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed font-sans">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             <div className="flex flex-wrap gap-4 items-center pt-2">
@@ -109,17 +184,17 @@ export default function AboutSection() {
                 href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center space-x-2 bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-white font-bold py-3 px-6 rounded-full text-xs tracking-wider uppercase transition-colors shadow-sm"
+                className="group inline-flex items-center space-x-2 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-bold py-3.5 px-7 rounded-full text-xs tracking-wider uppercase transition-all shadow-sm active:scale-95"
               >
                 <span>Know More About IMC</span>
-                <ArrowUpRight size={14} className="text-slate-50 dark:text-slate-400" />
+                <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
 
               <a
                 href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold py-3 px-6 rounded-full text-xs tracking-wider uppercase transition-colors shadow-lg shadow-pink-600/10"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white font-bold py-3.5 px-7 rounded-full text-xs tracking-wider uppercase transition-all shadow-lg shadow-pink-600/20 active:scale-95"
               >
                 <Instagram size={14} />
                 <span>Follow on Instagram</span>

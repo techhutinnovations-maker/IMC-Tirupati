@@ -9,7 +9,6 @@ export default function Footer({ onNavigate }: FooterProps) {
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
     { name: "Our Wings", id: "wings" },
-    { name: "Events", id: "events" },
     { name: "Gallery", id: "gallery" },
     { name: "Contact & Enquiry", id: "contact" }
   ];

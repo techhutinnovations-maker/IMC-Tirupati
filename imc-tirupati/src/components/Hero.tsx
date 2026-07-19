@@ -1,7 +1,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronRight, Play, Sparkles, MapPin, Users, Zap } from "lucide-react";
+import {
+  ChevronRight, Play, Sparkles, MapPin, Users, Zap, Music,
+  Trophy,
+  Camera,
+  Trees,
+  BookOpen,
+} from "lucide-react";
 import { STATS } from "../data";
 import { useRef } from "react";
+import heroImage1 from "../../assets/hero1.avif";
+import heroImage2 from "../../assets/hero2.avif";
+import heroImage3 from "../../assets/hero3.avif";
+
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
@@ -10,23 +20,23 @@ interface HeroProps {
 export default function Hero({ onNavigate }: HeroProps) {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
-  
+
   // Parallax effects for background elements
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      id="home" 
+      id="home"
       className="relative min-h-[100vh] lg:min-h-[110vh] flex flex-col justify-center overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-500"
     >
       {/* --- BACKGROUND LAYER --- */}
       <div className="absolute inset-0 z-0">
         <motion.div style={{ y: y1, opacity }} className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1600&q=80"
+            src={heroImage1}
             alt="Community"
             className="w-full h-full object-cover opacity-30 dark:opacity-20 scale-110 blur-[2px] dark:blur-0"
           />
@@ -41,7 +51,7 @@ export default function Hero({ onNavigate }: HeroProps) {
       {/* --- CONTENT LAYER --- */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
+
           {/* Left Side: Typography & CTAs */}
           <div className="lg:col-span-7 space-y-8">
             <motion.div
@@ -79,7 +89,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               transition={{ delay: 0.4 }}
               className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-xl font-medium leading-relaxed"
             >
-              Join a vibrant community in Tirupati where interests turn into experiences. 
+              Join a vibrant community in Tirupati where interests turn into experiences.
               From music jams to weekend treks, we build connections that matter.
             </motion.p>
 
@@ -120,10 +130,10 @@ export default function Hero({ onNavigate }: HeroProps) {
               animate={{ opacity: 1, scale: 1 }}
               className="relative z-20 w-72 h-96 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 rotate-3"
             >
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600" className="w-full h-full object-cover" />
+              <img src={heroImage2} className="w-full h-full object-cover" />
               <div className="absolute bottom-4 left-4 right-4 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl">
-                 <p className="text-[10px] font-black uppercase text-orange-500">Board Games Night</p>
-                 <p className="text-xs font-bold dark:text-white">Social Wing Meetup</p>
+                <p className="text-[10px] font-black uppercase text-orange-500">Board Games Night</p>
+                <p className="text-xs font-bold dark:text-white">Social Wing Meetup</p>
               </div>
             </motion.div>
 
@@ -133,7 +143,7 @@ export default function Hero({ onNavigate }: HeroProps) {
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-10 right-0 z-30 w-48 h-48 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 -rotate-6"
             >
-              <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=400" className="w-full h-full object-cover" />
+              <img src={heroImage3} className="w-full h-full object-cover" />
             </motion.div>
 
             {/* Badge: Live Location */}
@@ -158,12 +168,29 @@ export default function Hero({ onNavigate }: HeroProps) {
               animate={{ scale: 1 }}
               className="absolute top-1/4 -left-10 z-40 bg-white dark:bg-slate-900 py-3 px-4 rounded-full shadow-xl border border-slate-100 dark:border-slate-800 flex items-center gap-3"
             >
-              <div className="flex -space-x-3">
-                {[1,2,3].map(i => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200" />
+              <div className="flex -space-x-2">
+                {[
+                  { Icon: Music, color: "bg-pink-500" },
+                  { Icon: Trophy, color: "bg-emerald-500" },
+                  { Icon: BookOpen, color: "bg-orange-500" },
+                ].map(({ Icon, color }, index) => (
+                  <div
+                    key={index}
+                    className={`w-9 h-9 rounded-full border-2 border-white dark:border-slate-800 ${color} flex items-center justify-center shadow-md`}
+                  >
+                    <Icon size={16} className="text-white" />
+                  </div>
                 ))}
               </div>
-              <p className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-wider">500+ Joined</p>
+
+              <div>
+                <p className="text-xs font-black text-slate-800 dark:text-white">
+                  10+ Wings
+                </p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-wider">
+                  Music • Sports • Trekking
+                </p>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -171,7 +198,7 @@ export default function Hero({ onNavigate }: HeroProps) {
 
       {/* --- STATS BENTO BAR --- */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 w-full pb-10">
-        <motion.div 
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -191,7 +218,7 @@ export default function Hero({ onNavigate }: HeroProps) {
       </div>
 
       {/* Floating Scroll Indicator */}
-      <motion.div 
+      <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"

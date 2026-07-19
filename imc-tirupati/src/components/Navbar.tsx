@@ -26,7 +26,8 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
     { name: "About", id: "about" },
     { name: "Our Wings", id: "wings" },
     { name: "Gallery", id: "gallery" },
-    { name: "Contact", id: "contact" }
+    { name: "Contact", id: "contact" },
+    { name: "Join Team", id: "team" },
   ];
 
   const handleLinkClick = (id) => {

@@ -198,7 +198,7 @@ export default function TestimonialsSection() {
               ))}
             </div>
             <p className="text-sm font-black text-slate-900 dark:text-white">
-              +500 Members Strong
+              25k+ Members Strong
             </p>
           </div>
 

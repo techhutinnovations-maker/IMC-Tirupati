@@ -5,8 +5,8 @@ import { MessageCircle } from "lucide-react";
 export default function FloatingWhatsApp() {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Replace with your actual WhatsApp number (include country code, no + or spaces)
-  const phoneNumber = "919123456789"; 
+  // WhatsApp number used across the website
+  const phoneNumber = "9550815185";
   const message = "Hi IMC Tirupati! I'd like to know more about the community.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

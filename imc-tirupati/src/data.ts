@@ -1,328 +1,396 @@
 import { Wing, CommunityEvent, GalleryItem } from "./types";
+import image10 from "../assets/10.jpeg";
+import image11 from "../assets/11.png";
+import image12 from "../assets/12.png";
+import image13 from "../assets/13.png";
+import image14 from "../assets/14.png";
+import image15 from "../assets/15.png";
+import image16 from "../assets/16.png";
+import image17 from "../assets/17.png";
+import image18 from "../assets/18.png";
+import image19 from "../assets/19.png";
+import image20 from "../assets/20.png";
+import image21 from "../assets/21.png";
+import image22 from "../assets/22.png";
+import image23 from "../assets/23.png";
+import image24 from "../assets/24.png";
+import image25 from "../assets/25.png";
+import image26 from "../assets/26.png";
+import image27 from "../assets/27.png";
+import image28 from "../assets/28.png";
+import image29 from "../assets/29.png";
+import image30 from "../assets/30.png";
+import image31 from "../assets/31.png";
+import culture from "../assets/culture.avif";
+import connect from "../assets/connect.avif";
+import creator from "../assets/creator.avif";
+import sports from "../assets/sports.avif";
+import women from "../assets/women.avif";
+import startup from "../assets/startup.avif";
+import kids from "../assets/kids.avif";
+import dance from "../assets/dance.avif";
+import music from "../assets/music.avif";
+import nature from "../assets/nature.avif";
+import social from "../assets/social.avif";
+
+import event from '../assets/members/Anudeep-event.jpeg';
+import badminton from '../assets/members/Ganesh-badminton.jpeg';
+import boardgame from '../assets/members/Guru-boadgame.jpeg';
+import head from '../assets/members/Haasya-head.jpeg';
+import cur from '../assets/members/Harshit-cue.jpeg';
+import coreteam from '../assets/members/kalyan-coreteam.jpeg';
+import musiccap from '../assets/members/musiccaption.jpeg';
+import volleyball from '../assets/members/Nitheesh-volleyball.jpeg';
+import book from '../assets/members/Rohitha-book.jpeg';
+import natures from '../assets/members/Tharun-nature.jpeg';
+import cricket from '../assets/members/Uday-cricket.jpeg';
 
 export const WINGS_DATA: Wing[] = [
   {
-    id: "music",
-    name: "Music Club",
-    tagline: "Where melodies bring people together.",
-    iconName: "Music",
-    shortIntro: "A space for singers, musicians, instrumentalists, and everyone who simply loves music.",
-    detailedDesc: "From acoustic jamming sessions under the open sky to energetic live stage performances, the Music Club creates cozy spaces for people to connect through sound, rhythm, and creative energy. Whether you are an accomplished instrumentalist, a bedroom vocalist, or an eager listener, we have a mic and a cushion reserved for you.",
+    id: "culture",
+    name: "Culture & Lifestyle",
+    tagline: "Celebrating heritage, one tradition at a time.",
+    iconName: "Palette",
+    shortIntro: "A hub for traditional arts, local history, and the unique lifestyle of Tirupati.",
+    detailedDesc: "The Culture & Lifestyle wing explores the rich tapestry of our local heritage. From food walks through ancient streets to workshops on traditional art forms like Kalamkari and local folklore, we bridge the gap between historical roots and modern daily living.",
     activities: [
       {
-        title: "Sunset Jam Sessions",
-        description: "Unplugged backyard circles where members pick up acoustic guitars, ukuleles, and percussions to play old classics and modern indie hits.",
-        frequency: "Every Saturday Evening"
-      },
-      {
-        title: "Live Open Mic Showcase",
-        description: "A supportive, low-pressure community platform designed to encourage first-time performers to showcase their vocals, instrumentals, or poetry.",
+        title: "Heritage Food Walks",
+        description: "Exploring authentic local eateries and learning the history behind traditional recipes and temple-town cuisines.",
         frequency: "Monthly"
       },
       {
-        title: "Rhythm & Vocal Workshops",
-        description: "Interactive learning masterclasses hosted by professional mentors covering voice control, scale dynamics, and collaborative songwriting.",
-        frequency: "Bi-monthly"
+        title: "Local Artisan Workshops",
+        description: "Hands-on sessions with local craftsmen to learn pottery, weaving, and the traditional arts of the Rayalaseema region.",
+        frequency: "Quarterly"
       }
     ],
-    team: [
-      { name: "Aarav Sharma", role: "Club Coordinator & Lead Guitarist" },
-      { name: "Anjali Rao", role: "Co-coordinator & Lead Vocalist" }
-    ],
-    accentColor: "from-purple-500 to-indigo-600",
+    team: [{ name: "Rajesh Iyer", role: "Heritage Curator" }],
+    accentColor: "from-violet-600 to-purple-500",
     hoverAccent: "bg-purple-500",
-    image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1000&q=80",
+    image: culture,
     gradient: "from-purple-950 via-slate-900 to-black"
   },
   {
-    id: "books",
-    name: "Books Club",
-    tagline: "Read. Discuss. Connect.",
-    iconName: "BookOpen",
-    shortIntro: "A welcoming space where stories and ideas come alive through deep conversations.",
-    detailedDesc: "We believe books are gateways to deeper friendships. The Books Club hosts highly engaging discussions that venture far beyond the final page. In our sessions, members share raw reviews, exchange life perspectives, participate in silent read-a-thons, and build an inclusive intellectual home.",
+    id: "connect",
+    name: "Connect Tirupati",
+    tagline: "Bridging talent with opportunity.",
+    iconName: "Briefcase",
+    shortIntro: "The professional pulse of IMC, focused on talent acquisition and networking.",
+    detailedDesc: "Connect Tirupati is our professional wing. We focus on bridging the gap between local talent and global opportunities, hosting career mixers, resume workshops, and networking events for the city's growing professional community.",
     activities: [
       {
-        title: "The Sunday Book Talk",
-        description: "Our signature bi-weekly circle discussing pre-selected books across fiction, philosophy, self-development, and poetry over tea.",
-        frequency: "Alternate Sundays"
+        title: "Professional Mixers",
+        description: "Structured networking events designed to connect freelancers, recruiters, and corporate professionals.",
+        frequency: "Monthly"
       },
       {
-        title: "Silent Reading Hours",
-        description: "Two hours of pure digital detox where members gather in a cozy, sunlit room to read their personal books in shared silence.",
-        frequency: "Every Wednesday"
-      },
-      {
-        title: "Book Exchange & Donating",
-        description: "A miniature community library project where members swap old favorites, recommend hidden gems, and curate community reading chests.",
+        title: "Talent Spotlight",
+        description: "Monthly digital features of local talent followed by offline interview-prep and referral circles.",
         frequency: "Ongoing"
       }
     ],
-    team: [
-      { name: "Meera Nair", role: "Club Coordinator & Literary Curator" },
-      { name: "Vikram Seth", role: "Co-coordinator & Editorial Lead" }
-    ],
-    accentColor: "from-blue-500 to-sky-600",
+    team: [{ name: "Priya Sharma", role: "Networking Director" }],
+    accentColor: "from-blue-600 to-cyan-500",
     hoverAccent: "bg-blue-600",
-    image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1000&q=80",
+    image: connect,
     gradient: "from-blue-950 via-slate-900 to-black"
   },
   {
-    id: "playing",
-    name: "Playing & Games Wing",
-    tagline: "Play together. Connect beyond the game.",
-    iconName: "Gamepad2",
-    shortIntro: "A fun and energetic space that brings people together through sports and board games.",
-    detailedDesc: "The Playing Wing believes in healthy competition, outdoor play, and intellectual play. From intense tabletop strategy games and social deduction circles to full-day outdoor trekking expeditions in Tirupati's beautiful landscape, we break regular routines to spark pure childhood joy.",
-    activities: [
-      {
-        title: "Trek to Talakona & Beyond",
-        description: "Day-long trekking and outdoor camping expeditions exploring natural waterfalls, hill trails, and rich wildlife reserves near Tirupati.",
-        frequency: "Seasonal / Monthly"
-      },
-      {
-        title: "Tabletop Strategy Nights",
-        description: "Immersive games of Settlers of Catan, Ticket to Ride, Avalon, and standard classic chess to spark quick thinking and laughter.",
-        frequency: "Every Thursday"
-      },
-      {
-        title: "Weekend Turf Sports",
-        description: "Recreational box cricket tournaments, high-intensity turf football, and casual badminton matches welcoming players of all skill levels.",
-        frequency: "Every Sunday Morning"
-      }
-    ],
-    team: [
-      { name: "Rohan Verma", role: "Adventure & Sports Lead" },
-      { name: "Kavya Hegde", role: "Tabletop & Board Games Coordinator" }
-    ],
-    accentColor: "from-emerald-500 to-green-600",
-    hoverAccent: "bg-emerald-500",
-    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1000&q=80",
-    gradient: "from-emerald-950 via-slate-900 to-black"
-  },
-  {
-    id: "craft",
-    name: "Craft Club",
-    tagline: "Create. Express. Inspire.",
-    iconName: "Palette",
-    shortIntro: "A creative, tactile space for people who enjoy hands-on making, art, and DIY craft.",
-    detailedDesc: "The Craft Club celebrates fine arts, custom designs, and raw imagination. Through guided, step-by-step sessions on painting, upcycling, clay modeling, and candle making, our members decompress from daily screens and build beautiful tactile pieces with their own hands.",
-    activities: [
-      {
-        title: "DIY Candle Making",
-        description: "Learning the science of wax pouring, scent formulation, and container styling to create custom-scented soy and gel candles.",
-        frequency: "Monthly"
-      },
-      {
-        title: "Watercolor & Painting Walks",
-        description: "Taking drawing boards outdoors to historical spots in Tirupati to sketch and paint landscapes, temple architecture, and nature.",
-        frequency: "Alternate Saturdays"
-      },
-      {
-        title: "Pottery & Upcycling Workshops",
-        description: "Guided hands-on clay manipulation and creative lessons turning vintage plastic, cardboard, and glass into unique home art.",
-        frequency: "Every Quarter"
-      }
-    ],
-    team: [
-      { name: "Neha Patel", role: "Fine Arts & Painting Instructor" },
-      { name: "Aditya Sen", role: "Co-coordinator & DIY Specialist" }
-    ],
-    accentColor: "from-amber-500 to-orange-600",
-    hoverAccent: "bg-amber-500",
-    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1000&q=80",
-    gradient: "from-amber-950 via-slate-900 to-black"
-  },
-  {
-    id: "photo",
-    name: "Photo Club",
-    tagline: "Capture moments. Create stories.",
-    iconName: "Camera",
-    shortIntro: "See the world through a creative lens and preserve stunning slices of community life.",
-    detailedDesc: "For visual dreamers, street photowalkers, and smartphone camera enthusiasts. The Photo Club focuses on the art of capturing true emotions, dramatic shadows, and historical narratives. We travel around Tirupati's rich cultural avenues to explore composition, lighting, and cinematic visual stories.",
-    activities: [
-      {
-        title: "Tirupati Heritage PhotoWalks",
-        description: "Morning expeditions photographing the streets, street markets, and temple architecture around Kapilatheertham and Tiruchanoor.",
-        frequency: "Monthly"
-      },
-      {
-        title: "Mobile & DSLR Editing Masterclass",
-        description: "Practical tutorials on Adobe Lightroom mobile, color grading, tone curves, and curation rules to establish a personal style.",
-        frequency: "Bi-monthly"
-      },
-      {
-        title: "Theme Photography Contests",
-        description: "Open community challenges with creative constraints (e.g. 'Shadow Play', 'Rhythm of Streets', 'Golden Hours') evaluated by veterans.",
-        frequency: "Monthly"
-      }
-    ],
-    team: [
-      { name: "Siddharth Roy", role: "Lead Visual Storyteller & Filmmaker" },
-      { name: "Riya Deshmukh", role: "Street & Portrait Specialist" }
-    ],
-    accentColor: "from-rose-500 to-pink-600",
-    hoverAccent: "bg-rose-500",
-    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80",
-    gradient: "from-rose-950 via-slate-900 to-black"
-  },
-  {
     id: "social",
-    name: "Social Club",
+    name: "Social Welfare Club",
     tagline: "Serve. Share. Make impact.",
     iconName: "Heart",
     shortIntro: "A purposeful space to give back, organize social drives, and build a kinder society.",
-    detailedDesc: "We believe community is not just about our personal enjoyment, but also about supporting the society we reside in. The Social Club orchestrates environmental preservation, tree planting, food distribution campaigns, and educational activities at orphanages and remote schools around Tirupati.",
+    detailedDesc: "The Social Welfare Club orchestrates environmental preservation, tree planting, food distribution campaigns, and educational activities at remote schools around Tirupati.",
     activities: [
       {
-        title: "Green Tirupati Preservation Drive",
-        description: "Dedicated morning tree plantations, waste segregation awareness booths, and cleanliness campaigns around water reservoirs.",
+        title: "Green Tirupati Preservation",
+        description: "Dedicated morning tree plantations and waste segregation awareness booths around water reservoirs.",
         frequency: "Monthly"
       },
       {
-        title: "Volunteering & Education Circles",
-        description: "Weekend coaching, painting municipal schools, and distributing school kits, stationery, and books to underfunded children.",
+        title: "Kindness Kitchen",
+        description: "Collaborative project serving home-cooked weekend meals to the homeless and those in need.",
+        frequency: "Every Sunday"
+      }
+    ],
+    team: [{ name: "Dr. Amit Prasad", role: "Director of Social Welfare" }],
+    accentColor: "from-red-600 to-rose-500",
+    hoverAccent: "bg-red-500",
+    image: social,
+    gradient: "from-rose-950 via-slate-900 to-black"
+  },
+  {
+    id: "nature",
+    name: "Nature Retreat Club",
+    tagline: "Find peace in the wild.",
+    iconName: "TreePine",
+    shortIntro: "Eco-stays, trekking, and nature therapy for the urban soul.",
+    detailedDesc: "Escape the concrete jungle. We organize nature-focused getaways, bird watching sessions, and eco-friendly camping trips to the Seshachalam hills and surrounding scenic spots.",
+    activities: [
+      {
+        title: "Forest Bathing",
+        description: "Guided silent walks through the hill trails for mental rejuvenation and stress relief.",
         frequency: "Bi-weekly"
       },
       {
-        title: "Kindness Kitchen Initiative",
-        description: "A collaborative kitchen project preparing and serving highly nutritious, home-cooked weekend meals to homeless populations.",
-        frequency: "Every Sunday Afternoon"
+        title: "Eco-Camping",
+        description: "Overnight stays in sustainable camps with star-gazing sessions and bonfire stories.",
+        frequency: "Seasonal"
       }
     ],
-    team: [
-      { name: "Dr. Amit Prasad", role: "Director of Social Welfare Projects" },
-      { name: "Sneha Murthy", role: "Co-coordinator & Volunteer Manager" }
+    team: [{ name: "Varun Teja", role: "Expedition Guide" }],
+    accentColor: "from-emerald-600 to-green-500",
+    hoverAccent: "bg-emerald-500",
+    image: nature,
+    gradient: "from-emerald-950 via-slate-900 to-black"
+  },
+  {
+    id: "music",
+    name: "IMC Music Club",
+    tagline: "Where melodies bring people together.",
+    iconName: "Music",
+    shortIntro: "A space for singers, musicians, and everyone who simply loves music.",
+    detailedDesc: "From acoustic jam sessions to live stage performances, the Music Club creates cozy spaces for people to connect through sound and rhythm. Whether you're a professional or an eager listener, there's a mic for you.",
+    activities: [
+      {
+        title: "Sunset Jam Sessions",
+        description: "Unplugged backyard circles with acoustic guitars, ukuleles, and percussions.",
+        frequency: "Weekly"
+      }
     ],
-    accentColor: "from-teal-500 to-cyan-600",
-    hoverAccent: "bg-teal-500",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=80",
-    gradient: "from-teal-950 via-slate-900 to-black"
+    team: [{ name: "Aarav Sharma", role: "Music Coordinator" }],
+    accentColor: "from-indigo-600 to-blue-500",
+    hoverAccent: "bg-indigo-500",
+    image: music,
+    gradient: "from-purple-950 via-slate-900 to-black"
+  },
+  {
+    id: "sports",
+    name: "Sports Club",
+    tagline: "Play hard, stay fit.",
+    iconName: "Trophy",
+    shortIntro: "Bringing people together through healthy competition and team sports.",
+    detailedDesc: "From weekend box cricket to high-intensity turf football, we break daily routines to spark childhood joy and physical fitness.",
+    activities: [
+      {
+        title: "Turf Wars",
+        description: "Weekend box cricket and football tournaments for all skill levels.",
+        frequency: "Every Sunday"
+      }
+    ],
+    team: [{ name: "Kiran Dev", role: "Sports Coordinator" }],
+    accentColor: "from-orange-600 to-red-500",
+    hoverAccent: "bg-orange-500",
+    image: sports,
+    gradient: "from-orange-950 via-slate-900 to-black"
+  },
+  {
+    id: "startup",
+    name: "Startup Club",
+    tagline: "From Idea to Impact.",
+    iconName: "Rocket",
+    shortIntro: "The engine for entrepreneurs, builders, and visionaries in Tirupati.",
+    detailedDesc: "We provide a launchpad for local innovators. Join us for pitch drills, mentor sessions, and co-founder matchmaking events to turn your vision into reality.",
+    activities: [
+      {
+        title: "Pitch Perfect Sessions",
+        description: "Mock pitching to investors followed by detailed peer review and business modeling.",
+        frequency: "Monthly"
+      }
+    ],
+    team: [{ name: "Sandeep Rao", role: "Startup Mentor" }],
+    accentColor: "from-amber-600 to-yellow-500",
+    hoverAccent: "bg-amber-600",
+    image: startup,
+    gradient: "from-amber-950 via-slate-900 to-black"
+  },
+  {
+    id: "dance",
+    name: "Dance Community 2.0",
+    tagline: "Express through movement.",
+    iconName: "Zap",
+    shortIntro: "A vibrant space for choreography, fitness, and pure emotional expression.",
+    detailedDesc: "Dance Community 2.0 is an evolution of rhythm. We explore contemporary, Bollywood, and folk dance as a form of fitness and creative release.",
+    activities: [
+      {
+        title: "Choreography Labs",
+        description: "Intensive 2-hour sessions learning routines from guest choreographers.",
+        frequency: "Weekly"
+      }
+    ],
+    team: [{ name: "Ishani Kapoor", role: "Lead Choreographer" }],
+    accentColor: "from-pink-600 to-rose-500",
+    hoverAccent: "bg-pink-500",
+    image: dance,
+    gradient: "from-pink-950 via-slate-900 to-black"
+  },
+  {
+    id: "woman",
+    name: "Woman Only Community",
+    tagline: "Safe spaces, strong voices.",
+    iconName: "Flower2",
+    shortIntro: "A dedicated circle for women to network, learn, and empower each other.",
+    detailedDesc: "A safe sanctuary where women share experiences, discuss career growth, and participate in wellness workshops focused on self-care and leadership.",
+    activities: [
+      {
+        title: "Empowerment Circles",
+        description: "Monthly discussions on personal finance, health, and leadership.",
+        frequency: "Monthly"
+      }
+    ],
+    team: [{ name: "Ananya Reddy", role: "Community Lead" }],
+    accentColor: "from-fuchsia-600 to-pink-500",
+    hoverAccent: "bg-fuchsia-500",
+    image: women,
+    gradient: "from-fuchsia-950 via-slate-900 to-black"
+  },
+  {
+    id: "kids",
+    name: "Kids & Parents Club",
+    tagline: "Growing together.",
+    iconName: "Baby",
+    shortIntro: "Playful learning for kids and supportive resources for parents.",
+    detailedDesc: "Modern parenting can be isolating. We create play-based learning sessions for children while providing a support network for parents to exchange advice.",
+    activities: [
+      {
+        title: "Mini-Makers Lab",
+        description: "Sensory play and creative arts for kids aged 4-10.",
+        frequency: "Weekly"
+      }
+    ],
+    team: [{ name: "Meera Nair", role: "Family Coordinator" }],
+    accentColor: "from-sky-600 to-blue-500",
+    hoverAccent: "bg-sky-500",
+    image: kids,
+    gradient: "from-sky-950 via-slate-900 to-black"
+  },
+  {
+    id: "creator",
+    name: "Creator Club",
+    tagline: "Frame your story.",
+    iconName: "Camera",
+    shortIntro: "For the YouTubers, Photographers, and Digital Storytellers.",
+    detailedDesc: "Whether it's DSLR photography or mobile reels, the Creator Club is where we master the art of storytelling in the digital age.",
+    activities: [
+      {
+        title: "Photowalks",
+        description: "Capturing the cinematic side of Tirupati's streets and architecture.",
+        frequency: "Monthly"
+      }
+    ],
+    team: [{ name: "Siddharth Roy", role: "Creative Director" }],
+    accentColor: "from-rose-600 to-orange-500",
+    hoverAccent: "bg-rose-500",
+    image: creator,
+    gradient: "from-rose-950 via-slate-900 to-black"
   }
 ];
 
 export const EVENTS_DATA: CommunityEvent[] = [
   {
     id: "evt1",
-    title: "Acoustic Jamming Night",
-    wingId: "music",
-    wingName: "Music Club",
+    title: "Startup Pitch Night",
+    wingId: "startup",
+    wingName: "Startup Club",
     date: "25 May 2026",
-    location: "Samskruthi Open Grounds, Tirupati",
-    description: "An open sky campfire gathering with acoustic guitars, cajon, and raw vocals. Bring your instruments or just sing along to golden melodies under the stars.",
-    image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=600&q=80",
-    badgeColor: "bg-purple-500/20 text-purple-400 border-purple-500/30"
+    location: "IT Hub Center, Tirupati",
+    description: "Watch 5 local founders pitch their ideas to a panel of mentors. Networking and snacks included.",
+    image: startup,
+    badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
   },
   {
     id: "evt2",
-    title: "Adventure Trek to Talakona",
-    wingId: "playing",
-    wingName: "Playing Wing",
+    title: "Forest Birdwatching",
+    wingId: "nature",
+    wingName: "Nature Retreat",
     date: "02 June 2026",
-    location: "Talakona Forest Reserve, Tirupati",
-    description: "A physical escape into the dense deciduous forests of Talakona. Experience steep hill climbs, natural waterfalls, bird watching, and team building games.",
-    image: "https://images.unsplash.com/photo-1551632811-561730d1e4a6?auto=format&fit=crop&w=600&q=80",
+    location: "Seshachalam Biosphere",
+    description: "An early morning guided tour to spot rare bird species in their natural habitat.",
+    image: nature,
     badgeColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
   },
   {
     id: "evt3",
-    title: "The Sunday Book Talk",
-    wingId: "books",
-    wingName: "Books Club",
-    date: "09 June 2026",
-    location: "The Reading Cozy Cafe, Tirupati",
-    description: "Our signature book talk discussing psychological realism, magic realism, and philosophy. This week, we explore and review 'Ikigai' and 'Atomic Habits'.",
-    image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80",
-    badgeColor: "bg-blue-500/20 text-blue-400 border-blue-500/30"
-  },
-  {
-    id: "evt4",
-    title: "DIY Candle Making",
-    wingId: "craft",
-    wingName: "Craft Club",
-    date: "16 June 2026",
-    location: "Community Center Hall, Tirupati",
-    description: "A wonderful, scented hands-on session on raw wax melting, custom fragrance selection, wick settings, and beautiful glass jar wax pouring.",
-    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80",
-    badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/30"
+    title: "Dance & Fitness Workshop",
+    wingId: "dance",
+    wingName: "Dance Community",
+    date: "10 June 2026",
+    location: "City Fitness Studio",
+    description: "A high-energy fusion of Bollywood and contemporary dance movements.",
+    image: dance,
+    badgeColor: "bg-pink-500/20 text-pink-400 border-pink-500/30"
   }
 ];
 
 export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: "gal1",
-    url: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80",
-    title: "Group campfire song session under open skies",
+    url: music,
+    title: "Music Jam Session",
     category: "Music"
   },
   {
     id: "gal2",
-    url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-    title: "Tabletop strategy meetups with board game lovers",
-    category: "Playing"
+    url: startup,
+    title: "Startup Brainstorming",
+    category: "Startup"
   },
   {
     id: "gal3",
-    url: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80",
-    title: "Creative pottery painting and clay model making",
-    category: "Craft"
+    url: dance,
+    title: "Dance Performance prep",
+    category: "Dance"
   },
   {
     id: "gal4",
-    url: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
-    title: "Welfare programs spreading smiles at a neighborhood center",
-    category: "Social"
-  },
-  {
-    id: "gal5",
-    url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-    title: "Photography outdoor walks documenting Tirupati's heritage",
-    category: "Photo"
-  },
-  {
-    id: "gal6",
-    url: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
-    title: "Team discussions planning upcoming social work events",
-    category: "Social"
-  },
-  {
-    id: "gal7",
-    url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
-    title: "Sunset jamming gathering in the outskirts of town",
-    category: "Music"
-  },
-  {
-    id: "gal8",
-    url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80",
-    title: "Book reading circles discussing contemporary novels",
-    category: "Books"
+    url: nature,
+    title: "Nature Trekking",
+    category: "Nature"
   }
 ];
 
 export const TESTIMONIALS = [
   {
-    quote: "Joining IMC Tirupati changed my life. I went from being stuck in a boring work-home routine to jamming on Saturdays and volunteering on Sundays!",
+    quote: "Connect Tirupati helped me find a mentor who guided my career transition into Tech. This community is a goldmine for professionals.",
     author: "Kiran Kumar",
-    role: "Music & Social Club Member",
+    role: "Connect Club Member",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
   },
   {
-    quote: "The Book Club is my sanctuary. The level of empathy, deep discussions, and book swaps have created an amazing intellectual family for me here.",
-    author: "Priyanka Roy",
-    role: "Books Club Enthusiast",
+    quote: "As a new parent, the Kids club provided me with a village to raise my child. The playdates are the highlight of my week.",
+    author: "Sneha Reddy",
+    role: "Parents Club Enthusiast",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
-  },
-  {
-    quote: "I coordinate treks for the Playing Wing. The energy of IMC's members is contagious. Hiking up Talakona with this group is pure bliss.",
-    author: "Rohan Verma",
-    role: "Adventure Lead",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
   }
 ];
 
 export const STATS = [
-  { label: "6+ WINGS", description: "Clubs & Spaces", icon: "Layers" },
-  { label: "100+ EVENTS", description: "Conducted Annually", icon: "Calendar" },
-  { label: "1000+ MEMBERS", description: "Active Community", icon: "Users" },
-  { label: "ONE", description: "Vibrant Community", icon: "Heart" }
+  { label: "10+ WINGS", description: "Specialized Communities", icon: "Layers" },
+  { label: "150+ EVENTS", description: "Conducted Annually", icon: "Calendar" },
+  { label: "25k+ MEMBERS", description: "Active Community", icon: "Users" },
+  { label: "ONE", description: "Heart of Tirupati", icon: "Heart" }
+];
+
+export const localImages = [image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26, image27, image28, image29, image30, image31];
+
+export interface TribeMember {
+  name: string;
+  role: string;
+  img: string;
+}
+
+export const TRIBE_MEMBERS: TribeMember[] = [
+  { name: "Kalyan. TN", role: "Core Team", img: coreteam },
+  { name: "Anudeep", role: "Event Design Executive", img: event },
+  { name: "Haasya Vanteru", role: "Head of events & Operations", img: head },
+  { name: "Ganesh", role: "Captain - Badminton Club", img: badminton },
+  { name: "Neeyati", role: "Captain - Music Community", img: musiccap },
+  { name: "Guru", role: "Captain - Board Games Club", img: boardgame },
+  { name: "Rohitha Reddy", role: "Captain - Book Club", img: book },
+  { name: "Harshith", role: "Captain - Cue Club", img: cur },
+  { name: "Nitheesh", role: "Captain - Volleyball Club", img: volleyball },
+  { name: "Tharun Reddy", role: "Captain - Nature Retreat", img: natures },
+  { name: "Uday", role: "Captain - Cricket Club", img: cricket },
 ];

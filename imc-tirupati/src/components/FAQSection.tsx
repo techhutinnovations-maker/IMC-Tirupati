@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, Sparkles, MessageCircle, BrainCircuit } from "lucide-react";
+import { Plus, Minus, Sparkles, MessageCircle, BrainCircuit,Music,
+  Trophy,
+  Camera,
+  Trees,
+  BookOpen, } from "lucide-react";
+  import faq from '../../assets/faq.avif';
 
 interface FAQItem {
   question: string;
@@ -44,7 +49,7 @@ export default function FAQSection() {
           {/* Main Image Container */}
           <div className="relative group overflow-hidden rounded-[2.5rem] aspect-[4/5] max-h-[600px] shadow-2xl">
             <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1471&auto=format&fit=crop" 
+              src={faq} 
               alt="Discussion and Thinking"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -152,12 +157,21 @@ export default function FAQSection() {
             className="flex items-center gap-4 pt-4"
           >
             <div className="flex -space-x-2">
-              {[1,2,3].map(i => (
-                <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-[#050505] bg-slate-200 dark:bg-slate-800" />
-              ))}
+              {[
+                  { Icon: Music, color: "bg-pink-500" },
+                  { Icon: Trophy, color: "bg-emerald-500" },
+                  { Icon: BookOpen, color: "bg-orange-500" },
+                ].map(({ Icon, color }, index) => (
+                  <div
+                    key={index}
+                    className={`w-8 h-8 rounded-full ${color} border-2 border-white dark:border-[#050505] flex items-center justify-center shadow-md`}
+                  >
+                    <Icon size={14} className="text-white" />
+                  </div>
+                ))}
             </div>
             <p className="text-xs text-slate-500 font-medium">
-              Join 500+ members. <a href="#contact" className="text-orange-500 font-bold hover:underline underline-offset-4">Talk to a coordinator</a>
+              Join 25k+ members. <a href="#contact" className="text-orange-500 font-bold hover:underline underline-offset-4">Talk to a coordinator</a>
             </p>
           </motion.div>
         </div>

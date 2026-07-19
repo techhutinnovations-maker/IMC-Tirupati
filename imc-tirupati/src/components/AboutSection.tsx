@@ -1,7 +1,15 @@
 import { motion } from "motion/react";
 import { Instagram, ArrowUpRight, Sparkles } from "lucide-react";
 
-export default function AboutSection() {
+import songs from '../../assets/songs.avif';
+import community from '../../assets/community.avif';
+import sports1 from '../../assets/sports1.avif';
+
+interface AboutSectionProps {
+  onExploreAbout: () => void;
+}
+
+export default function AboutSection({ onExploreAbout }: AboutSectionProps) {
   const highlights = [
     {
       title: "Interest-Based Wings",
@@ -75,7 +83,7 @@ export default function AboutSection() {
                 className="absolute top-0 left-0 w-[60%] aspect-[4/5] rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-900 z-10"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=400&q=80"
+                  src={community}
                   alt="Singing together"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -92,7 +100,7 @@ export default function AboutSection() {
                 className="absolute bottom-0 right-0 w-[65%] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 z-20"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=500&q=80"
+                  src={sports1}
                   alt="Laughter and community"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -109,7 +117,7 @@ export default function AboutSection() {
                 className="absolute top-4 right-2 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white dark:border-slate-900 z-30"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=300&q=80"
+                  src={songs}
                   alt="Board games night"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -180,15 +188,14 @@ export default function AboutSection() {
             </div>
 
             <div className="flex flex-wrap gap-4 items-center pt-2">
-              <a
-                href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="
-                target="_blank"
-                rel="noreferrer"
+              <button
+                type="button"
+                onClick={onExploreAbout}
                 className="group inline-flex items-center space-x-2 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 font-bold py-3.5 px-7 rounded-full text-xs tracking-wider uppercase transition-all shadow-sm active:scale-95"
               >
                 <span>Know More About IMC</span>
                 <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </button>
 
               <a
                 href="https://www.instagram.com/imc.tirupati?igsh=MTE2ZjJzYXpmdXg4MQ=="

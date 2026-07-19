@@ -1,15 +1,16 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// Ensure WINGS_DATA has: id, name, tagline, detailedDesc, activities, image, team
-import { WINGS_DATA } from "../data"; 
 import { 
   Music, BookOpen, Gamepad2, Palette, Camera, Heart, 
-  Users, Clock, Sparkles, ArrowRight, CheckCircle2 
+  Users, Clock, Sparkles, ArrowRight, CheckCircle2,
+  TreePine, Rocket, Trophy, Move, Flower2, Baby,
+  Search, MapPin, Briefcase
 } from "lucide-react";
+import { WINGS_DATA } from "../data"; 
 
 /**
- * THEME DEFINITIONS
- * These keys MUST match the 'id' in your WINGS_DATA (case-insensitive check added below)
+ * UPDATED THEME DEFINITIONS
+ * Added mappings for all 11+ clubs
  */
 const THEMES: Record<string, { 
   color: string; 
@@ -18,58 +19,26 @@ const THEMES: Record<string, {
   bg: string;
   icon: any 
 }> = {
-  music: { 
-    color: "from-indigo-600 to-blue-500", 
-    glow: "rgba(79, 70, 229, 0.15)", 
-    border: "border-indigo-500/20", 
-    bg: "bg-indigo-500/5",
-    icon: Music 
-  },
-  books: { 
-    color: "from-amber-600 to-orange-500", 
-    glow: "rgba(217, 119, 6, 0.15)", 
-    border: "border-amber-500/20", 
-    bg: "bg-amber-500/5",
-    icon: BookOpen 
-  },
-  games: { 
-    color: "from-rose-600 to-pink-500", 
-    glow: "rgba(225, 29, 72, 0.15)", 
-    border: "border-rose-500/20", 
-    bg: "bg-rose-500/5",
-    icon: Gamepad2 
-  },
-  craft: { 
-    color: "from-emerald-600 to-teal-500", 
-    glow: "rgba(5, 150, 105, 0.15)", 
-    border: "border-emerald-500/20", 
-    bg: "bg-emerald-500/5",
-    icon: Palette 
-  },
-  photo: { 
-    color: "from-cyan-600 to-sky-500", 
-    glow: "rgba(8, 145, 178, 0.15)", 
-    border: "border-cyan-500/20", 
-    bg: "bg-cyan-500/5",
-    icon: Camera 
-  },
-  social: { 
-    color: "from-purple-600 to-fuchsia-500", 
-    glow: "rgba(147, 51, 234, 0.15)", 
-    border: "border-purple-500/20", 
-    bg: "bg-purple-500/5",
-    icon: Heart 
-  },
+  culture: { color: "from-violet-600 to-purple-500", glow: "rgba(139, 92, 246, 0.15)", border: "border-purple-500/20", bg: "bg-purple-500/5", icon: Palette },
+  connect: { color: "from-blue-600 to-cyan-500", glow: "rgba(37, 99, 235, 0.15)", border: "border-blue-500/20", bg: "bg-blue-500/5", icon: Briefcase },
+  social: { color: "from-red-600 to-rose-500", glow: "rgba(225, 29, 72, 0.15)", border: "border-rose-500/20", bg: "bg-rose-500/5", icon: Heart },
+  nature: { color: "from-emerald-600 to-green-500", glow: "rgba(5, 150, 105, 0.15)", border: "border-emerald-500/20", bg: "bg-emerald-500/5", icon: TreePine },
+  music: { color: "from-indigo-600 to-blue-500", glow: "rgba(79, 70, 229, 0.15)", border: "border-indigo-500/20", bg: "bg-indigo-500/5", icon: Music },
+  sports: { color: "from-orange-600 to-red-500", glow: "rgba(234, 88, 12, 0.15)", border: "border-orange-500/20", bg: "bg-orange-500/5", icon: Trophy },
+  startup: { color: "from-amber-600 to-yellow-500", glow: "rgba(217, 119, 6, 0.15)", border: "border-amber-500/20", bg: "bg-amber-500/5", icon: Rocket },
+  dance: { color: "from-pink-600 to-rose-500", glow: "rgba(219, 39, 119, 0.15)", border: "border-pink-500/20", bg: "bg-pink-500/5", icon: Move },
+  woman: { color: "from-fuchsia-600 to-pink-500", glow: "rgba(192, 38, 211, 0.15)", border: "border-fuchsia-500/20", bg: "bg-fuchsia-500/5", icon: Flower2 },
+  kids: { color: "from-sky-600 to-blue-500", glow: "rgba(2, 132, 199, 0.15)", border: "border-sky-500/20", bg: "bg-sky-500/5", icon: Baby },
+  creator: { color: "from-rose-600 to-orange-500", glow: "rgba(225, 29, 72, 0.15)", border: "border-rose-500/20", bg: "bg-rose-500/5", icon: Camera },
 };
 
 export default function WingsSection() {
-  // Initialize with the ID of your first wing from data
-  const [selectedWingId, setSelectedWingId] = useState(WINGS_DATA[0]?.id || "music");
-  
-  // Safe Theme Lookup Helper
+  const [selectedWingId, setSelectedWingId] = useState(WINGS_DATA[0]?.id || "culture");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const getTheme = (id: string) => {
     const key = id.toLowerCase();
-    return THEMES[key] || THEMES.music; // Fallback to music theme if ID not found
+    return THEMES[key] || THEMES.culture;
   };
 
   const activeWing = useMemo(() => 
@@ -80,169 +49,173 @@ export default function WingsSection() {
   const theme = getTheme(activeWing.id);
 
   return (
-    <section id="wings" className="py-24 md:py-36 bg-white dark:bg-[#050505] relative overflow-hidden transition-colors duration-700">
+    <section id="wings" className="py-20 md:py-32 bg-white dark:bg-[#050505] relative overflow-hidden">
       
-      {/* 1. Dynamic Ambient Atmosphere */}
+      {/* Dynamic Ambient Background */}
       <div 
-        className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-in-out"
+        className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-in-out opacity-40"
         style={{
-          background: `radial-gradient(circle at 50% 20%, ${theme.glow} 0%, transparent 50%)`
+          background: `radial-gradient(circle at 50% 30%, ${theme.glow} 0%, transparent 70%)`
         }}
-      />
-      
-      {/* Texture Overlay */}
-      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none grayscale" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")` }} 
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className={`inline-block text-[10px] font-black tracking-[0.3em] uppercase mb-4 px-4 py-1.5 rounded-full border ${theme.border} bg-white dark:bg-slate-900 shadow-sm transition-colors duration-500`}
-          >
-            Explore Your Passions
-          </motion.span>
-          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white leading-[1.1] mb-6">
-            The Six <span className={`bg-gradient-to-r ${theme.color} bg-clip-text text-transparent transition-all duration-500`}>Wings</span> of IMC.
-          </h2>
-          <p className="text-slate-500 dark:text-slate-400 text-lg font-medium leading-relaxed">
-            Every club is a community within itself. Choose a wing to see how we spend our weekends.
+        {/* Header - Scaled for many wings */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-2xl">
+            <motion.span 
+              className={`inline-block text-[10px] font-black tracking-[0.3em] uppercase mb-4 px-4 py-1.5 rounded-full border ${theme.border} bg-white dark:bg-slate-900 shadow-sm`}
+            >
+              Our Communities
+            </motion.span>
+            <h2 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+              The <span className={`bg-gradient-to-r ${theme.color} bg-clip-text text-transparent`}>Communities</span> of IMC.
+            </h2>
+          </div>
+          <p className="text-slate-500 dark:text-slate-400 text-lg font-medium max-w-xs border-l-2 border-slate-100 dark:border-slate-800 pl-6">
+            10+ specialized wings, one mission. Find where you belong.
           </p>
         </div>
 
-        {/* 2. Modern Wing Selector */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {WINGS_DATA.map((wing) => {
-            const isSelected = wing.id === selectedWingId;
-            const wingTheme = getTheme(wing.id);
-            const WingIcon = wingTheme.icon || Users;
-            
-            return (
-              <button
-                key={wing.id}
-                onClick={() => setSelectedWingId(wing.id)}
-                className={`relative px-6 py-4 rounded-2xl flex items-center gap-3 transition-all duration-300 group ${
-                  isSelected ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
-                }`}
-              >
-                {isSelected && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className={`absolute inset-0 bg-gradient-to-r ${wingTheme.color} rounded-2xl shadow-xl shadow-indigo-500/20`}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">
-                  <WingIcon size={20} className={isSelected ? "animate-pulse" : "opacity-70 group-hover:opacity-100"} />
-                </span>
-                <span className="relative z-10 font-bold text-sm tracking-wide uppercase">
-                  {wing.name}
-                </span>
-              </button>
-            );
-          })}
+        {/* 2. Scrollable Selector with Fade Masks */}
+        <div className="relative mb-16 group">
+          {/* Gradient Masks for scrolling */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white dark:from-[#050505] to-transparent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white dark:from-[#050505] to-transparent z-20 pointer-events-none" />
+
+          <div 
+            ref={scrollContainerRef}
+            className="flex flex-nowrap overflow-x-auto gap-3 pb-4 no-scrollbar scroll-smooth"
+          >
+            {WINGS_DATA.map((wing) => {
+              const isSelected = wing.id === selectedWingId;
+              const wingTheme = getTheme(wing.id);
+              const WingIcon = wingTheme.icon || Users;
+              
+              return (
+                <button
+                  key={wing.id}
+                  onClick={() => setSelectedWingId(wing.id)}
+                  className={`relative flex-shrink-0 px-6 py-3 rounded-xl flex items-center gap-3 transition-all duration-300 border ${
+                    isSelected 
+                      ? `text-white border-transparent` 
+                      : "text-slate-500 border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10"
+                  }`}
+                >
+                  {isSelected && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className={`absolute inset-0 bg-gradient-to-r ${wingTheme.color} rounded-xl shadow-lg`}
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">
+                    <WingIcon size={18} className={isSelected ? "animate-pulse" : "opacity-70"} />
+                  </span>
+                  <span className="relative z-10 font-bold text-xs tracking-wide uppercase whitespace-nowrap">
+                    {wing.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* 3. Main Content Display */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedWingId}
-            initial={{ opacity: 0, scale: 0.98, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.02, y: -20 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12"
           >
-            {/* Image Side */}
-            <div className="lg:col-span-5 group relative">
-              <div className={`absolute -inset-4 bg-gradient-to-r ${theme.color} opacity-20 blur-3xl rounded-[3rem] transition-all duration-700`} />
-              <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden border border-white/20 dark:border-slate-800 shadow-2xl">
-                <img
-                  src={activeWing.image}
-                  alt={activeWing.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8">
-                   <div className="flex items-center gap-2 mb-2">
-                     <Sparkles size={16} className="text-yellow-400" />
-                     <span className="text-xs font-bold text-white/70 uppercase tracking-widest">Featured Event</span>
-                   </div>
-                   <h4 className="text-2xl font-bold text-white mb-2">Capturing {activeWing.name}</h4>
-                   <p className="text-sm text-white/60 line-clamp-2">Authentic moments from our last meetup in Tirupati.</p>
+            {/* Image & Stats Side */}
+            <div className="lg:col-span-5">
+              <div className="relative group">
+                <div className={`absolute -inset-4 bg-gradient-to-r ${theme.color} opacity-10 blur-2xl rounded-[3rem] group-hover:opacity-20 transition-opacity duration-700`} />
+                <div className="relative aspect-[16/10] lg:aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+                  <img
+                    src={activeWing.image}
+                    alt={activeWing.name}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  
+                  {/* Floating Tag */}
+                  <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                    Active Community
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Content Side */}
-            <div className="lg:col-span-7 flex flex-col justify-center space-y-10 lg:pl-8">
-              <div className="space-y-4">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${theme.color} flex items-center justify-center text-white shadow-lg`}>
-                  <theme.icon size={28} />
-                </div>
-                <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-                  {activeWing.name} <span className="text-slate-300 dark:text-slate-700 font-light">/</span> {activeWing.tagline}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <div className="space-y-6 mb-10">
+                <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white">
+                  {activeWing.name}
                 </h3>
-                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                <p className="text-xl font-bold italic bg-gradient-to-r from-slate-400 to-slate-500 bg-clip-text text-transparent">
+                  "{activeWing.tagline}"
+                </p>
+                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
                   {activeWing.detailedDesc}
                 </p>
               </div>
 
-              {/* Program Highlights Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Bento Grid Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                 {activeWing.activities.map((act, i) => (
-                  <motion.div 
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
+                  <div 
                     key={i} 
-                    className="p-5 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:border-white/20 transition-all group/card"
+                    className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:border-slate-200 dark:hover:border-white/20 transition-all"
                   >
-                    <div className="flex items-start gap-4">
-                      <div className={`mt-1 rounded-full p-1 bg-gradient-to-r ${theme.color}`}>
-                        <CheckCircle2 size={14} className="text-white" />
-                      </div>
-                      <div>
-                        <h5 className="font-bold text-slate-900 dark:text-white mb-1 group-hover/card:translate-x-1 transition-transform">{act.title}</h5>
-                        <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-tight">
-                          <Clock size={10} />
-                          {act.frequency}
-                        </div>
-                      </div>
+                    <CheckCircle2 size={20} className={`mb-3 bg-gradient-to-r ${theme.color} text-white rounded-full p-0.5`} />
+                    <h5 className="font-bold text-slate-900 dark:text-white mb-1">{act.title}</h5>
+                    <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase">
+                      <Clock size={12} /> {act.frequency}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
-              {/* Action Footer */}
-              <div className="flex flex-wrap items-center gap-6 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <div className="flex -space-x-3">
-                  {activeWing.team.map((leader, idx) => (
-                    <div 
-                      key={idx}
-                      title={`${leader.name} - ${leader.role}`}
-                      className={`w-12 h-12 rounded-full border-4 border-white dark:border-[#050505] bg-gradient-to-br ${theme.color} flex items-center justify-center text-white font-bold text-xs shadow-lg`}
-                    >
-                      {leader.name[0]}
-                    </div>
-                  ))}
+              {/* Dynamic Footer Section */}
+              <div className="flex flex-wrap items-center gap-8 pt-8 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-4">
+                  <div className="flex -space-x-3">
+                    {activeWing.team.map((leader, idx) => (
+                      <div 
+                        key={idx}
+                        className={`w-12 h-12 rounded-full border-4 border-white dark:border-[#050505] bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-[10px] font-black overflow-hidden shadow-lg`}
+                      >
+                         {/* Fallback to initials if no image */}
+                         <span className="uppercase">{leader.name.charAt(0)}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">Curated by Wing Leads</p>
+                    <p className="text-[11px] text-slate-500 mt-1 uppercase tracking-tighter">Experts in {activeWing.name}</p>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">Curated by the Wing Leads</p>
-                  <p className="text-xs text-slate-500 mt-1">Passionate experts in {activeWing.name.toLowerCase()}</p>
-                </div>
-                <button className={`flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:scale-105 active:scale-95 transition-all`}>
-                  Join Wing <ArrowRight size={16} />
+
+                <button className={`ml-auto flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:shadow-2xl hover:-translate-y-1 transition-all group`}>
+                  Join the Community 
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   );
 }

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Users, Sun, Moon } from "lucide-react";
+import logo from '../../assets/logo.png';
+
 
 export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,16 +52,17 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
             className="flex-shrink-0 flex items-center cursor-pointer min-w-0"
             onClick={() => handleLinkClick("home")}
           >
-            <div className="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
-              <span className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wider bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 bg-clip-text text-transparent filter drop-shadow-md font-display shrink-0">
-                IMC
-              </span>
-              <div className="hidden sm:block border-l border-slate-300 dark:border-slate-800 h-6 mx-2 shrink-0" />
-              <div className="hidden sm:flex flex-col min-w-0">
-                <span className="text-xs font-bold text-slate-900 dark:text-white tracking-widest leading-none font-sans uppercase truncate">
+            <div className="flex items-center gap-3 min-w-0">
+              <img
+                src={logo}
+                alt="IMC Tirupati logo"
+                className="h-14 sm:h-20 md:h-30 w-auto object-contain"
+              />
+              <div className="hidden sm:flex flex-col min-w-0 text-left">
+                <span className="text-sm font-black tracking-[0.25em] text-slate-900 dark:text-white uppercase leading-none">
                   Tirupati
                 </span>
-                <span className="text-[9px] text-slate-500 dark:text-slate-400 font-medium tracking-tight truncate">
+                <span className="text-[10px] font-semibold text-orange-500 dark:text-slate-400 tracking-[0.2em] uppercase mt-1">
                   IT'S MY COMMUNITY
                 </span>
               </div>

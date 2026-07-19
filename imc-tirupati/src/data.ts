@@ -44,6 +44,7 @@ import volleyball from '../assets/members/Nitheesh-volleyball.jpeg';
 import book from '../assets/members/Rohitha-book.jpeg';
 import natures from '../assets/members/Tharun-nature.jpeg';
 import cricket from '../assets/members/Uday-cricket.jpeg';
+import kcore from '../assets/members/kushi-core.jpeg';
 
 export const WINGS_DATA: Wing[] = [
   {
@@ -393,4 +394,5 @@ export const TRIBE_MEMBERS: TribeMember[] = [
   { name: "Nitheesh", role: "Captain - Volleyball Club", img: volleyball },
   { name: "Tharun Reddy", role: "Captain - Nature Retreat", img: natures },
   { name: "Uday", role: "Captain - Cricket Club", img: cricket },
+  { name: "Khushi", role: "Core Team", img: kcore },
 ];

@@ -1,5 +1,5 @@
 import { Instagram, Mail, Phone, Heart, ArrowUp } from "lucide-react";
-
+import logo from '../../assets/logo.png';
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
 }
@@ -16,8 +16,6 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   const legalLinks = [
     { name: "Terms & Conditions", id: "terms" },
-    { name: "Privacy Policy", id: "privacy" },
-    { name: "Community Guidelines", id: "guidelines" },
   ];
 
   const handleScrollToTop = () => {
@@ -33,14 +31,19 @@ export default function Footer({ onNavigate }: FooterProps) {
           
           {/* Column 1: Brand */}
           <div className="md:col-span-5 text-left space-y-4">
-            <div className="flex items-center space-x-2">
-              <span className="text-3xl font-extrabold tracking-wider bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 bg-clip-text text-transparent font-display">
-                IMC
-              </span>
-              <div className="border-l border-slate-200 dark:border-slate-800 h-6 mx-2" />
-              <div className="flex flex-col text-slate-800 dark:text-white uppercase font-sans font-bold">
-                <span className="text-xs tracking-widest">Tirupati</span>
-                <span className="text-[9px] text-slate-400 tracking-tight">IT'S MY COMMUNITY</span>
+            <div className="flex items-center gap-3">
+              <img
+                src={logo}
+                alt="IMC Tirupati logo"
+                className="h-20 sm:h-30 w-auto object-contain"
+              />
+              <div className="flex flex-col text-left">
+                <span className="text-sm font-black tracking-[0.25em] text-slate-900 dark:text-white uppercase leading-none">
+                  Tirupati
+                </span>
+                <span className="text-[10px] font-semibold text-orange-500 dark:text-slate-400 tracking-[0.2em] uppercase mt-1">
+                  IT'S MY COMMUNITY
+                </span>
               </div>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed max-w-sm">

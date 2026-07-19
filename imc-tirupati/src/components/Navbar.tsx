@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Instagram, Users, Sun, Moon } from "lucide-react";
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.PNG';
 
 
 export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme }) {

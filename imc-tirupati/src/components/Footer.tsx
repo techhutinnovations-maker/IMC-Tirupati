@@ -1,5 +1,5 @@
 import { Instagram, Mail, Phone, Heart, ArrowUp } from "lucide-react";
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.PNG';
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
 }

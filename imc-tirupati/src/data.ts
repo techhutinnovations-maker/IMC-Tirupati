@@ -38,7 +38,7 @@ import badminton from '../assets/members/Ganesh-badminton.jpeg';
 import boardgame from '../assets/members/Guru-boadgame.jpeg';
 import head from '../assets/members/Haasya-head.jpeg';
 import cur from '../assets/members/Harshit-cue.jpeg';
-import coreteam from '../assets/members/kalyan-coreteam.jpeg';
+import coreteam from '../assets/members/Kalyan-coreteam.jpeg';
 import musiccap from '../assets/members/musiccaption.jpeg';
 import volleyball from '../assets/members/Nitheesh-volleyball.jpeg';
 import book from '../assets/members/Rohitha-book.jpeg';

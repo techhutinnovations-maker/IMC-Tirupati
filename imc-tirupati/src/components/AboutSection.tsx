@@ -136,7 +136,7 @@ export default function AboutSection({ onExploreAbout }: AboutSectionProps) {
                   <Sparkles size={16} className="text-white" />
                 </div>
                 <div className="leading-tight">
-                  <div className="text-lg font-extrabold text-slate-900 dark:text-white font-display">6 Wings</div>
+                  <div className="text-lg font-extrabold text-slate-900 dark:text-white font-display">10+ Wings</div>
                   <div className="text-[10px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">One Community</div>
                 </div>
               </motion.div>

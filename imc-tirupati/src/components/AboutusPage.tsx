@@ -65,22 +65,22 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
 
   const flagships = [
     {
-        title: "IMC Wonderland",
-        tag: "First-Ever Carnival",
-        img: wonderland,
-        desc: "2,000+ crowd. VR zones, ramp walks, and flashmobs. The city's biggest collaborative outdoor event."
+      title: "IMC Wonderland",
+      tag: "First-Ever Carnival",
+      img: wonderland,
+      desc: "2,000+ crowd. VR zones, ramp walks, and flashmobs. The city's biggest collaborative outdoor event."
     },
     {
-        title: "Powerstride",
-        tag: "Fitness Fest (SAAP)",
-        img: step,
-        desc: "Partnered with Police & Municipal Corp for the No Drug Campaign. Held at Tarakarama Stadium."
+      title: "Powerstride",
+      tag: "Fitness Fest (SAAP)",
+      img: step,
+      desc: "Partnered with Police & Municipal Corp for the No Drug Campaign. Held at Tarakarama Stadium."
     },
     {
-        title: "Raagam",
-        tag: "Music Festival",
-        img: ragam,
-        desc: "Tirupati's biggest music celebration featuring live jamming, bands, and hundreds of singers."
+      title: "Raagam",
+      tag: "Music Festival",
+      img: ragam,
+      desc: "Tirupati's biggest music celebration featuring live jamming, bands, and hundreds of singers."
     },
   ];
 
@@ -123,7 +123,7 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
             <span className="sm:hidden">Back</span>
           </button>
 
-         
+
         </div>
       </nav>
 
@@ -145,35 +145,35 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
                 <p className="text-base sm:text-xl md:text-3xl text-slate-500 max-w-2xl font-medium leading-snug sm:leading-tight">
                   Tirupati's premier lifestyle ecosystem. We bridge the gap between tradition and social connection.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8">
+                {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8">
                    <button className="w-full sm:w-auto px-6 py-4 sm:px-10 sm:py-5 rounded-2xl bg-slate-900 text-white font-black uppercase text-xs tracking-widest shadow-2xl hover:scale-105 transition-all">Explore Wings</button>
                    <button className="w-full sm:w-auto px-6 py-4 sm:px-10 sm:py-5 rounded-2xl border border-slate-200 font-black uppercase text-xs tracking-widest hover:bg-slate-50 transition-all">Connect Now</button>
-                </div>
+                </div> */}
               </motion.div>
             </div>
 
             <div className="lg:col-span-5 relative h-[600px] hidden lg:block">
-               {/* SCRAPBOOK IMAGES */}
-               <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-[70%] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-[10px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-10 cursor-zoom-in group" onClick={() => setSelectedImg(hero1)}>
-                 <img src={hero1} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Scrapbook 1" />
-               </motion.div>
-               <motion.div style={{ y: y2 }} className="absolute bottom-10 right-0 w-[75%] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-[10px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-20 cursor-zoom-in group" onClick={() => setSelectedImg(hero2)}>
-                 <img src={hero2} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Scrapbook 2" />
-               </motion.div>
+              {/* SCRAPBOOK IMAGES */}
+              <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-[70%] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-[10px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-10 cursor-zoom-in group" onClick={() => setSelectedImg(hero1)}>
+                <img src={hero1} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Scrapbook 1" />
+              </motion.div>
+              <motion.div style={{ y: y2 }} className="absolute bottom-10 right-0 w-[75%] aspect-[4/5] rounded-[2.5rem] overflow-hidden border-[10px] border-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] z-20 cursor-zoom-in group" onClick={() => setSelectedImg(hero2)}>
+                <img src={hero2} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Scrapbook 2" />
+              </motion.div>
 
-               {/* Floating Stat Badge */}
-               <motion.div
-                 initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 12 }} transition={{ type: "spring", delay: 0.5 }}
-                 className="absolute top-1/2 -left-12 z-30 p-6 rounded-3xl bg-white border border-slate-100 shadow-2xl flex items-center gap-4"
-               >
-                 <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white">
-                   <Users size={24} />
-                 </div>
-                 <div className="text-left">
-                   <div className="text-3xl font-black italic tracking-tighter text-slate-900">25K+</div>
-                   <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400">WhatsApp Members</div>
-                 </div>
-               </motion.div>
+              {/* Floating Stat Badge */}
+              <motion.div
+                initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 12 }} transition={{ type: "spring", delay: 0.5 }}
+                className="absolute top-1/2 -left-12 z-30 p-6 rounded-3xl bg-white border border-slate-100 shadow-2xl flex items-center gap-4"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-orange-500 flex items-center justify-center text-white">
+                  <Users size={24} />
+                </div>
+                <div className="text-left">
+                  <div className="text-3xl font-black italic tracking-tighter text-slate-900">25K+</div>
+                  <div className="text-[9px] font-bold uppercase tracking-widest text-slate-400">WhatsApp Members</div>
+                </div>
+              </motion.div>
             </div>
 
             {/* Mobile-only stat strip (replaces the hidden desktop floating badge) */}
@@ -214,7 +214,7 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
                   <div className="flex items-center gap-3 sm:gap-4">
                     <Star className="text-orange-500 shrink-0" size={22} />
                     <div>
-                      <div className="text-2xl sm:text-3xl font-black text-slate-900 mb-1">30+</div>
+                      <div className="text-2xl sm:text-3xl font-black text-slate-900 mb-1">10+</div>
                       <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Interest Clubs</div>
                     </div>
                   </div>
@@ -263,20 +263,20 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
         <section className="py-16 sm:py-24 md:py-32 bg-slate-50 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-12 sm:mb-16 md:mb-20 gap-6 sm:gap-8">
-               <div className="text-left">
-                  <h2 className="text-[11px] sm:text-xs font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-orange-500 mb-3 sm:mb-4 italic">Proof, Not Promises</h2>
-                  <h3 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-slate-900 uppercase italic">Event Track Record.</h3>
-               </div>
-               <div className="flex gap-6 sm:gap-10">
-                 <div className="text-center">
-                   <div className="text-3xl sm:text-4xl font-black text-orange-500 tracking-tighter">2,000+</div>
-                   <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Crowd Pulled</div>
-                 </div>
-                 <div className="text-center">
-                   <div className="text-3xl sm:text-4xl font-black text-orange-500 tracking-tighter">2</div>
-                   <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Major Flagships</div>
-                 </div>
-               </div>
+              <div className="text-left">
+                <h2 className="text-[11px] sm:text-xs font-black uppercase tracking-[0.3em] sm:tracking-[0.4em] text-orange-500 mb-3 sm:mb-4 italic">Proof, Not Promises</h2>
+                <h3 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-slate-900 uppercase italic">Event Track Record.</h3>
+              </div>
+              <div className="flex gap-6 sm:gap-10">
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl font-black text-orange-500 tracking-tighter">2,000+</div>
+                  <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Crowd Pulled</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl sm:text-4xl font-black text-orange-500 tracking-tighter">2</div>
+                  <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Major Flagships</div>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -299,10 +299,10 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
             </div>
 
             <div className="mt-10 sm:mt-16 flex flex-wrap justify-center gap-4 sm:gap-6">
-               <div className="flex items-center gap-2.5 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-center">
-                 <ShieldCheck className="text-orange-500 shrink-0" size={18} />
-                 <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">Backed by SAAP, Police & Corp</span>
-               </div>
+              <div className="flex items-center gap-2.5 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 rounded-full bg-white border border-slate-100 shadow-sm text-slate-600 text-center">
+                <ShieldCheck className="text-orange-500 shrink-0" size={18} />
+                <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest">Backed by SAAP, Police & Corp</span>
+              </div>
             </div>
           </div>
         </section>
@@ -325,11 +325,20 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
                 { n: "Startup Sessions", i: Briefcase },
                 { n: "Flagship Celebrations", i: Flame },
               ].map((act, i) => (
-                <motion.div key={i} whileHover={{ scale: 1.05 }} className="p-5 sm:p-7 md:p-10 rounded-[1.75rem] sm:rounded-[2.5rem] md:rounded-[3rem] bg-white border border-slate-100 flex flex-col items-center gap-3 sm:gap-4 group hover:border-orange-200 transition-all shadow-sm">
-                   <div className="w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
-                     <act.i size={22} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
-                   </div>
-                   <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-600 leading-tight">{act.n}</span>
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => window.open("https://linktr.ee/IMC.Tirupati", "_blank")}
+                  className="cursor-pointer p-5 sm:p-7 md:p-10 rounded-[1.75rem] sm:rounded-[2.5rem] md:rounded-[3rem] bg-white border border-slate-100 flex flex-col items-center gap-3 sm:gap-4 group hover:border-orange-200 transition-all shadow-sm"
+                >
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+                    <act.i size={22} className="sm:w-6 sm:h-6 md:w-7 md:h-7" />
+                  </div>
+
+                  <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-600 leading-tight text-center">
+                    {act.n}
+                  </span>
                 </motion.div>
               ))}
             </div>
@@ -347,38 +356,38 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
               </p>
               <div className="space-y-4">
                 <div className="p-6 sm:p-8 rounded-[1.75rem] sm:rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group">
-                   <div className="flex justify-between items-center mb-2 gap-2">
-                     <h4 className="text-xl sm:text-2xl font-black italic text-orange-400 uppercase">Connect.Tirupati</h4>
-                     <ArrowUpRight size={20} className="text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
-                   </div>
-                   <p className="text-slate-400 text-sm">Bridges employers and job seekers through city-wide career drives.</p>
+                  <div className="flex justify-between items-center mb-2 gap-2">
+                    <h4 className="text-xl sm:text-2xl font-black italic text-orange-400 uppercase">Connect.Tirupati</h4>
+                    <ArrowUpRight size={20} className="text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
+                  </div>
+                  <p className="text-slate-400 text-sm">Bridges employers and job seekers through city-wide career drives.</p>
                 </div>
                 <div className="p-6 sm:p-8 rounded-[1.75rem] sm:rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all group">
-                   <div className="flex justify-between items-center mb-2 gap-2">
-                     <h4 className="text-xl sm:text-2xl font-black italic text-orange-400 uppercase">Instagram Media</h4>
-                     <ArrowUpRight size={20} className="text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
-                   </div>
-                   <p className="text-slate-400 text-sm">Scales local cafes & startups through high-conversion brand storytelling.</p>
+                  <div className="flex justify-between items-center mb-2 gap-2">
+                    <h4 className="text-xl sm:text-2xl font-black italic text-orange-400 uppercase">Instagram Media</h4>
+                    <ArrowUpRight size={20} className="text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0" />
+                  </div>
+                  <p className="text-slate-400 text-sm">Scales local cafes & startups through high-conversion brand storytelling.</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-gradient-to-br from-orange-500 to-amber-600 p-7 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] text-left space-y-6 sm:space-y-8 md:space-y-10 shadow-2xl">
-               <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-white">Sponsorship Gain</h4>
-               <ul className="space-y-4 sm:space-y-6">
-                 {[
-                   "Direct access to an active, trust-built local audience",
-                   "Experiential marketing at 2,000+ crowd flagship events",
-                   "Launch products inside an engaged community, not cold ads",
-                   "Authentic brand association with the value 'community first'"
-                 ].map((item, i) => (
-                   <li key={i} className="flex items-start gap-3 sm:gap-4">
-                     <CheckCircle2 className="text-white shrink-0 mt-1" size={22} />
-                     <span className="text-base sm:text-lg font-bold leading-tight text-white/90">{item}</span>
-                   </li>
-                 ))}
-               </ul>
-               <button className="w-full py-5 sm:py-6 rounded-2xl sm:rounded-3xl bg-slate-900 text-white font-black uppercase text-xs tracking-widest shadow-xl hover:scale-105 transition-all">Partner with IMC</button>
+              <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-white">Sponsorship Gain</h4>
+              <ul className="space-y-4 sm:space-y-6">
+                {[
+                  "Direct access to an active, trust-built local audience",
+                  "Experiential marketing at 2,000+ crowd flagship events",
+                  "Launch products inside an engaged community, not cold ads",
+                  "Authentic brand association with the value 'community first'"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 sm:gap-4">
+                    <CheckCircle2 className="text-white shrink-0 mt-1" size={22} />
+                    <span className="text-base sm:text-lg font-bold leading-tight text-white/90">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <button className="w-full py-5 sm:py-6 rounded-2xl sm:rounded-3xl bg-slate-900 text-white font-black uppercase text-xs tracking-widest shadow-xl hover:scale-105 transition-all">Partner with IMC</button>
             </div>
           </div>
         </section>
@@ -393,20 +402,20 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-left">
-               <div className="p-7 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] bg-slate-50 border border-slate-100 space-y-5 sm:space-y-6 group hover:border-orange-200 transition-all">
-                  <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 italic">For Brands</h4>
-                  <p className="text-slate-500 font-medium leading-relaxed text-sm sm:text-base">Reach ~90% of Tirupati's young population through authentic, trust-built community association.</p>
-                  <a href="mailto:itsmycommunity.tirupati@gmail.com" className="inline-flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black uppercase tracking-widest text-orange-600 hover:gap-5 transition-all break-all sm:break-normal">
-                    <Mail size={18} className="shrink-0" /> Send Partnership Mail
-                  </a>
-               </div>
-               <div className="p-7 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] bg-slate-50 border border-slate-100 space-y-5 sm:space-y-6 group hover:border-orange-200 transition-all">
-                  <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 italic">For Members</h4>
-                  <p className="text-slate-500 font-medium leading-relaxed text-sm sm:text-base">Escape your routine. Find your hobby wing. Find your family in the heart of the city.</p>
-                  <a href="tel:+919550815185" className="inline-flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black uppercase tracking-widest text-orange-600 hover:gap-5 transition-all">
-                    <Phone size={18} className="shrink-0" /> Call us at +91 95508
-                  </a>
-               </div>
+              <div className="p-7 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] bg-slate-50 border border-slate-100 space-y-5 sm:space-y-6 group hover:border-orange-200 transition-all">
+                <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 italic">For Brands</h4>
+                <p className="text-slate-500 font-medium leading-relaxed text-sm sm:text-base">Reach ~90% of Tirupati's young population through authentic, trust-built community association.</p>
+                <a href="mailto:itsmycommunity.tirupati@gmail.com" className="inline-flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black uppercase tracking-widest text-orange-600 hover:gap-5 transition-all break-all sm:break-normal">
+                  <Mail size={18} className="shrink-0" /> Send Partnership Mail
+                </a>
+              </div>
+              <div className="p-7 sm:p-10 md:p-12 rounded-[2rem] sm:rounded-[3.5rem] bg-slate-50 border border-slate-100 space-y-5 sm:space-y-6 group hover:border-orange-200 transition-all">
+                <h4 className="text-xl sm:text-2xl font-black uppercase tracking-widest text-slate-900 italic">For Members</h4>
+                <p className="text-slate-500 font-medium leading-relaxed text-sm sm:text-base">Escape your routine. Find your hobby wing. Find your family in the heart of the city.</p>
+                <a href="tel:+919550815185" className="inline-flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-black uppercase tracking-widest text-orange-600 hover:gap-5 transition-all">
+                  <Phone size={18} className="shrink-0" /> Call us at +91 9550815185
+                </a>
+              </div>
             </div>
           </div>
         </footer>

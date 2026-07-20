@@ -54,7 +54,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <a href="https://instagram.com/imc.tirupati" target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 flex items-center justify-center text-slate-500 hover:text-orange-500 transition-colors">
                 <Instagram size={16} />
               </a>
-              <a href="mailto:hello@imctirupati.org" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 flex items-center justify-center text-slate-500 hover:text-orange-500 transition-colors">
+              <a href="mailto:itsmycommunity.tirupati@gmail.com" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 flex items-center justify-center text-slate-500 hover:text-orange-500 transition-colors">
                 <Mail size={16} />
               </a>
               <a href="tel:+919550815185" className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 flex items-center justify-center text-slate-500 hover:text-orange-500 transition-colors">
@@ -91,7 +91,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             </ul>
             <div className="pt-4">
                <p className="text-xs font-bold text-slate-800 dark:text-white uppercase">HQ Address</p>
-               <p className="text-xs text-slate-500 mt-1">Samskruthi Community Center, Tirupati, 517501</p>
+               <p className="text-xs text-slate-500 mt-1">Tirupati, 517501</p>
             </div>
           </div>
         </div>

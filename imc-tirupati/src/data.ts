@@ -354,16 +354,64 @@ export const GALLERY_ITEMS: GalleryItem[] = [
 
 export const TESTIMONIALS = [
   {
-    quote: "Connect Tirupati helped me find a mentor who guided my career transition into Tech. This community is a goldmine for professionals.",
-    author: "Kiran Kumar",
-    role: "Connect Club Member",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
+    quote: "Building Connect Tirupati has been about creating the social space I always felt our city was missing. It's rewarding to see strangers become family.",
+    author: "Kalyan. TN",
+    role: "Core Team"
   },
   {
-    quote: "As a new parent, the Kids club provided me with a village to raise my child. The playdates are the highlight of my week.",
-    author: "Sneha Reddy",
-    role: "Parents Club Enthusiast",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+    quote: "Every poster and design I create is a tribute to the vibrant energy of this community. I love giving a visual voice to our incredible events.",
+    author: "Anudeep",
+    role: "Event Design Executive"
+  },
+  {
+    quote: "There’s a unique magic in seeing an event go from a plan on paper to a room full of smiling people. Operations is where the heart of the club beats.",
+    author: "Haasya Vanteru",
+    role: "Head of events & Operations"
+  },
+  {
+    quote: "The Badminton Club isn't just about the score; it’s about that morning adrenaline and the post-match coffee that starts the day right.",
+    author: "Ganesh",
+    role: "Captain - Badminton Club"
+  },
+  {
+    quote: "Music has a way of breaking down walls. In our jam sessions, I’ve seen people find their confidence and their tribe through a simple melody.",
+    author: "Neeyati",
+    role: "Captain - Music Community"
+  },
+  {
+    quote: "I love watching a group of people start a board game as strangers and finish it as friends. That’s the real win at the Board Games Club.",
+    author: "Guru",
+    role: "Captain - Board Games Club"
+  },
+  {
+    quote: "The Book Club is my sanctuary. There is nothing more intellectually fulfilling than diving into a story and seeing it through twelve different perspectives.",
+    author: "Rohitha Reddy",
+    role: "Captain - Book Club"
+  },
+  {
+    quote: "The Cue Club is about precision and patience. It’s the perfect way for our members to switch off from work and focus on the game.",
+    author: "Harshith",
+    role: "Captain - Cue Club"
+  },
+  {
+    quote: "Nothing beats the high-stakes energy of a volleyball match. It’s where I see the true grit and teamwork of our community shine.",
+    author: "Nitheesh",
+    role: "Captain - Volleyball Club"
+  },
+  {
+    quote: "Leading the Nature Retreats has reminded me that peace is just a short trek away. We help people disconnect to truly reconnect.",
+    author: "Tharun Reddy",
+    role: "Captain - Nature Retreat"
+  },
+  {
+    quote: "Sunday morning cricket is a ritual. It’s about keeping that childhood passion alive while building professional networks on the pitch.",
+    author: "Uday",
+    role: "Captain - Cricket Club"
+  },
+  {
+    quote: "Being part of the Core Team has shown me the power of community. Every event we host is a step toward a more connected Tirupati.",
+    author: "Khushi",
+    role: "Core Team"
   }
 ];
 

@@ -1,23 +1,23 @@
 import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Music, BookOpen, Gamepad2, Palette, Camera, Heart, 
+import {
+  Music, BookOpen, Gamepad2, Palette, Camera, Heart,
   Users, Clock, Sparkles, ArrowRight, CheckCircle2,
   TreePine, Rocket, Trophy, Move, Flower2, Baby,
-  Search, MapPin, Briefcase
+  Search, MapPin, Briefcase,ChevronLeft, ChevronRight
 } from "lucide-react";
-import { WINGS_DATA } from "../data"; 
+import { WINGS_DATA } from "../data";
 
 /**
  * UPDATED THEME DEFINITIONS
  * Added mappings for all 11+ clubs
  */
-const THEMES: Record<string, { 
-  color: string; 
-  glow: string; 
-  border: string; 
+const THEMES: Record<string, {
+  color: string;
+  glow: string;
+  border: string;
   bg: string;
-  icon: any 
+  icon: any
 }> = {
   culture: { color: "from-violet-600 to-purple-500", glow: "rgba(139, 92, 246, 0.15)", border: "border-purple-500/20", bg: "bg-purple-500/5", icon: Palette },
   connect: { color: "from-blue-600 to-cyan-500", glow: "rgba(37, 99, 235, 0.15)", border: "border-blue-500/20", bg: "bg-blue-500/5", icon: Briefcase },
@@ -41,18 +41,31 @@ export default function WingsSection() {
     return THEMES[key] || THEMES.culture;
   };
 
-  const activeWing = useMemo(() => 
-    WINGS_DATA.find((w) => w.id === selectedWingId) || WINGS_DATA[0], 
+  const activeWing = useMemo(() =>
+    WINGS_DATA.find((w) => w.id === selectedWingId) || WINGS_DATA[0],
     [selectedWingId]
   );
 
   const theme = getTheme(activeWing.id);
 
+  const changeWing = (direction: "left" | "right") => {
+    const currentIndex = WINGS_DATA.findIndex((wing) => wing.id === selectedWingId);
+    const nextIndex = direction === "left"
+      ? (currentIndex - 1 + WINGS_DATA.length) % WINGS_DATA.length
+      : (currentIndex + 1) % WINGS_DATA.length;
+
+    const nextWing = WINGS_DATA[nextIndex];
+    setSelectedWingId(nextWing.id);
+
+    const button = scrollContainerRef.current?.children[nextIndex] as HTMLElement | undefined;
+    button?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  };
+
   return (
     <section id="wings" className="py-20 md:py-32 bg-white dark:bg-[#050505] relative overflow-hidden">
-      
+
       {/* Dynamic Ambient Background */}
-      <div 
+      <div
         className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-in-out opacity-40"
         style={{
           background: `radial-gradient(circle at 50% 30%, ${theme.glow} 0%, transparent 70%)`
@@ -60,22 +73,49 @@ export default function WingsSection() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        
+
         {/* Header - Scaled for many wings */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
-            <motion.span 
+            <motion.span
               className={`inline-block text-[10px] font-black tracking-[0.3em] uppercase mb-4 px-4 py-1.5 rounded-full border ${theme.border} bg-white dark:bg-slate-900 shadow-sm`}
             >
               Our Communities
             </motion.span>
+
             <h2 className="text-4xl sm:text-6xl font-black text-slate-900 dark:text-white leading-tight">
-              The <span className={`bg-gradient-to-r ${theme.color} bg-clip-text text-transparent`}>Communities</span> of IMC.
+              The{" "}
+              <span className={`bg-gradient-to-r ${theme.color} bg-clip-text text-transparent`}>
+                Communities
+              </span>{" "}
+              of IMC.
             </h2>
           </div>
-          <p className="text-slate-500 dark:text-slate-400 text-lg font-medium max-w-xs border-l-2 border-slate-100 dark:border-slate-800 pl-6">
-            10+ specialized wings, one mission. Find where you belong.
-          </p>
+
+          <div className="flex items-center gap-6">
+            <p className="hidden lg:block text-slate-500 dark:text-slate-400 text-lg font-medium max-w-xs border-l-2 border-slate-100 dark:border-slate-800 pl-6">
+              10+ specialized wings, one mission. Find where you belong.
+            </p>
+
+            {/* Navigation Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => changeWing("left")}
+                className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all shadow-sm"
+                aria-label="Scroll Left"
+              >
+                <ChevronLeft size={20} className="mx-auto" />
+              </button>
+
+              <button
+                onClick={() => changeWing("right")}
+                className="w-12 h-12 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all shadow-sm"
+                aria-label="Scroll Right"
+              >
+                <ChevronRight size={20} className="mx-auto" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* 2. Scrollable Selector with Fade Masks */}
@@ -84,7 +124,7 @@ export default function WingsSection() {
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white dark:from-[#050505] to-transparent z-20 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white dark:from-[#050505] to-transparent z-20 pointer-events-none" />
 
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex flex-nowrap overflow-x-auto gap-3 pb-4 no-scrollbar scroll-smooth"
           >
@@ -92,16 +132,15 @@ export default function WingsSection() {
               const isSelected = wing.id === selectedWingId;
               const wingTheme = getTheme(wing.id);
               const WingIcon = wingTheme.icon || Users;
-              
+
               return (
                 <button
                   key={wing.id}
                   onClick={() => setSelectedWingId(wing.id)}
-                  className={`relative flex-shrink-0 px-6 py-3 rounded-xl flex items-center gap-3 transition-all duration-300 border ${
-                    isSelected 
-                      ? `text-white border-transparent` 
+                  className={`relative flex-shrink-0 px-6 py-3 rounded-xl flex items-center gap-3 transition-all duration-300 border ${isSelected
+                      ? `text-white border-transparent`
                       : "text-slate-500 border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   {isSelected && (
                     <motion.div
@@ -142,7 +181,7 @@ export default function WingsSection() {
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
+
                   {/* Floating Tag */}
                   <div className="absolute top-6 left-6 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -169,8 +208,8 @@ export default function WingsSection() {
               {/* Bento Grid Features */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                 {activeWing.activities.map((act, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:border-slate-200 dark:hover:border-white/20 transition-all"
                   >
                     <CheckCircle2 size={20} className={`mb-3 bg-gradient-to-r ${theme.color} text-white rounded-full p-0.5`} />
@@ -187,12 +226,12 @@ export default function WingsSection() {
                 <div className="flex items-center gap-4">
                   <div className="flex -space-x-3">
                     {activeWing.team.map((leader, idx) => (
-                      <div 
+                      <div
                         key={idx}
                         className={`w-12 h-12 rounded-full border-4 border-white dark:border-[#050505] bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-[10px] font-black overflow-hidden shadow-lg`}
                       >
-                         {/* Fallback to initials if no image */}
-                         <span className="uppercase">{leader.name.charAt(0)}</span>
+                        {/* Fallback to initials if no image */}
+                        <span className="uppercase">{leader.name.charAt(0)}</span>
                       </div>
                     ))}
                   </div>
@@ -203,7 +242,7 @@ export default function WingsSection() {
                 </div>
 
                 <button className={`ml-auto flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:shadow-2xl hover:-translate-y-1 transition-all group`}>
-                  Join the Community 
+                  Join the Community
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>

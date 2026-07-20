@@ -8,11 +8,12 @@ import {
 // Import the structured data from your data.ts
 import { TRIBE_MEMBERS } from "../data";
 import { ArrowLeft } from "lucide-react";
+import logo from '../../assets/logo.PNG'; 
 
 // --- CONFIG ---
-const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwYl1500YJyaRQsW_y8cue5RHXciOLkS6ng6ICJtNPO6hLc4qAzaehd2qgxjKIDPsNZ/exec";
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzBwWnb61rI82_k5zj5P4pWnmfd1YpUqOz6KKC1SkHUbvaj93v1iNMkOtXV34alqzpn/exec";
 const WHATSAPP_GROUP_LINK = "https://wa.me/919550815185";
-const LATEST_EVENTS_LINK = "https://linktr.ee/imc_tirupati";
+const LATEST_EVENTS_LINK = "https://linktr.ee/IMC.Tirupati";
 
 export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => void }) {
     // --- MODAL & FORM STATE ---
@@ -112,8 +113,8 @@ export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => vo
                 </div>
             </nav>
 
-            <section className="relative pt-32 pb-16 md:pt-48 md:pb-32 px-4 overflow-hidden">
-                {/* Background Glows - Adjusted for mobile to prevent horizontal scroll */}
+            {/* --- HERO SECTION --- */}
+            <section className="relative pt-32 pb-16 md:pt-40 md:pb-32 px-4 overflow-hidden">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
                     <div className="absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 md:w-[500px] md:h-[500px] bg-orange-600/20 rounded-full blur-[80px] md:blur-[120px]" />
                 </div>
@@ -123,16 +124,24 @@ export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => vo
                     animate={{ opacity: 1, y: 0 }}
                     className="max-w-5xl mx-auto text-center"
                 >
-                    {/* Modern Badge - Smaller on mobile */}
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 md:mb-10">
-                        <span className="flex h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
-                        <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                            Phase 01 <span className="text-zinc-700 mx-1">/</span> The Collective
-                        </span>
-                    </div>
+                    {/* --- MAIN HERO LOGO --- */}
+                    <motion.div 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="mb-8 flex justify-center"
+                    >
+                        <div className="relative group">
+                            <div className="absolute inset-0 bg-orange-600/20 blur-3xl rounded-full group-hover:bg-orange-600/40 transition-all duration-700" />
+                            <img 
+                                src={logo} 
+                                alt="IMC Collective Logo" 
+                                className="relative w-48 h-48 md:w-80 md:h-80 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                            />
+                        </div>
+                    </motion.div>
 
-                    {/* Headline - Fluid scaling: text-5xl on mobile, text-9xl on desktop */}
-                    <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] font-black tracking-tighter mb-6 md:mb-8 leading-[0.9] uppercase text-white">
+                    <h1 className="text-4xl sm:text-7xl md:text-8xl lg:text-[110px] font-black tracking-tighter mb-6 md:mb-8 leading-[0.9] uppercase text-white">
                         Meet the <br className="hidden sm:block" />
                         <span className="text-orange-500 italic relative inline-block">
                             Curators.
@@ -149,7 +158,6 @@ export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => vo
                         A premium collective of digital visionaries. Join the next generation of creative curation.
                     </p>
 
-                    {/* Button Group - Stacks on mobile, Row on desktop */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
                         <button
                             onClick={() => { setShowModal(true); setModalStep("terms"); }}

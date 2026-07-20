@@ -18,8 +18,8 @@ export default function ContactSection() {
     {
       id: "email",
       label: "Email our team",
-      value: "hello@imctirupati.org",
-      href: "mailto:hello@imctirupati.org",
+      value: "itsmycommunity.tirupati@gmail.com",
+      href: "mailto:itsmycommunity.tirupati@gmail.com",
       icon: <Mail className="w-6 h-6" />,
       color: "bg-blue-500",
       description: "For collaborations, partnerships, and general queries."
@@ -27,7 +27,7 @@ export default function ContactSection() {
     {
       id: "phone",
       label: "Call or WhatsApp",
-      value: "+91 91234 67890",
+      value: "+91 9550815185",
       href: "https://wa.me/919550815185",
       icon: <Phone className="w-6 h-6" />,
       color: "bg-emerald-500",

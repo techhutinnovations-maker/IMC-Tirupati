@@ -101,7 +101,7 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
               <Instagram size={20} />
             </a>
             <button
-              onClick={() => handleLinkClick("contact")}
+              onClick={() => window.open("https://linktr.ee/IMC.Tirupati", "_blank")}
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-2 px-5 rounded-full text-xs tracking-wider uppercase transition-transform active:scale-95 shadow-lg shadow-orange-500/20"
             >
               <Users size={14} />

@@ -229,7 +229,7 @@ export default function App() {
               <GallerySection onExploreStandalone={() => handleNavigate("gallery")} />
             </section>
 
-            <TestimonialsSection />
+            <TestimonialsSection onNavigate={handleNavigate} />
             
             <FAQSection />
 

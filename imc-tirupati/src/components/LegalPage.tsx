@@ -248,7 +248,7 @@ export default function LegalPage({ onBack }: LegalPageProps) {
               <>
                 <div className="legal-card p-6 md:p-8 rounded-[2rem] mb-8 border-2 border-dashed border-[var(--board)]">
                   <p className="text-sm md:text-base text-[var(--ink-soft)] leading-relaxed font-medium">
-                    <span className="font-black text-orange-500">Draft &mdash; pending legal review.</span> This Privacy Policy reflects IMC's intended data practices and Indian data protection law (IT Act 2000, DPDP Act 2023), but has not yet been reviewed by counsel or formally adopted.
+                    <span className="font-black text-orange-500"></span> This Privacy Policy reflects IMC's intended data practices and Indian data protection law (IT Act 2000, DPDP Act 2023), but has not yet been reviewed by counsel or formally adopted.
                   </p>
                 </div>
                 <DocumentAccordion groups={PRIVACY_GROUPS} />

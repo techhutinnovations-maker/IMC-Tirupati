@@ -416,9 +416,9 @@ export const TESTIMONIALS = [
 ];
 
 export const STATS = [
-  { label: "10+ WINGS", description: "Specialized Communities", icon: "Layers" },
-  { label: "150+ EVENTS", description: "Conducted Annually", icon: "Calendar" },
-  { label: "25k+ MEMBERS", description: "Active Community", icon: "Users" },
+  { label: "50+ CLUBS", description: "Specialized Communities", icon: "Layers" },
+  { label: "700+ EVENTS", description: "Conducted Annually", icon: "Calendar" },
+  { label: "40k+ MEMBERS", description: "Active Community", icon: "Users" },
   { label: "ONE", description: "Heart of Tirupati", icon: "Heart" }
 ];
 

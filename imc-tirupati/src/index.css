@@ -36,3 +36,9 @@
   background: #ea580c;
 }
 
+button,
+a,
+[onclick],
+[role="button"] {
+  cursor: pointer;
+}

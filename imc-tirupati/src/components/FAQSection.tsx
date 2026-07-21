@@ -171,7 +171,7 @@ export default function FAQSection() {
                 ))}
             </div>
             <p className="text-xs text-slate-500 font-medium">
-              Join 25k+ members. <a href="#contact" className="text-orange-500 font-bold hover:underline underline-offset-4">Talk to a coordinator</a>
+              Join 40k+ members. <a href="#contact" className="text-orange-500 font-bold hover:underline underline-offset-4">Talk to a coordinator</a>
             </p>
           </motion.div>
         </div>

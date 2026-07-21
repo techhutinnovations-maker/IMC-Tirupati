@@ -101,25 +101,17 @@ export default function Navbar({ activeSection, onNavigate, theme, onToggleTheme
               <Instagram size={20} />
             </a>
             <button
-              onClick={() => window.open("https://linktr.ee/IMC.Tirupati", "_blank")}
+              onClick={() => onNavigate("about")}
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold py-2 px-5 rounded-full text-xs tracking-wider uppercase transition-transform active:scale-95 shadow-lg shadow-orange-500/20"
             >
               <Users size={14} />
-              <span>Join Community</span>
+              <span>Our Story</span>
             </button>
           </div>
 
           {/* Mobile / tablet controls — kept minimal so the bar never crowds on narrow screens */}
           <div className="lg:hidden flex items-center space-x-1 sm:space-x-2">
-            <button
-              onClick={onToggleTheme}
-              className="p-2 sm:p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-orange-500 transition-colors"
-              title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-
+           
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 sm:p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:text-orange-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50"

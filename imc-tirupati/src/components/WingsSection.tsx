@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CommunityJoinModal from "./CommunityJoinModal";
 import {
   Music, BookOpen, Gamepad2, Palette, Camera, Heart,
   Users, Clock, Sparkles, ArrowRight, CheckCircle2,
@@ -34,6 +35,7 @@ const THEMES: Record<string, {
 
 export default function WingsSection() {
   const [selectedWingId, setSelectedWingId] = useState(WINGS_DATA[0]?.id || "culture");
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const getTheme = (id: string) => {
@@ -94,7 +96,7 @@ export default function WingsSection() {
 
           <div className="flex items-center gap-6">
             <p className="hidden lg:block text-slate-500 dark:text-slate-400 text-lg font-medium max-w-xs border-l-2 border-slate-100 dark:border-slate-800 pl-6">
-              10+ specialized wings, one mission. Find where you belong.
+              50+ specialized wings, one mission. Find where you belong.
             </p>
 
             {/* Navigation Buttons */}
@@ -241,7 +243,10 @@ export default function WingsSection() {
                   </div>
                 </div>
 
-                <button className={`ml-auto flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:shadow-2xl hover:-translate-y-1 transition-all group`}>
+                <button
+                  onClick={() => setIsJoinModalOpen(true)}
+                  className={`ml-auto flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-sm hover:shadow-2xl hover:-translate-y-1 transition-all group`}
+                >
                   Join the Community
                   <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -250,6 +255,8 @@ export default function WingsSection() {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      <CommunityJoinModal isOpen={isJoinModalOpen} onClose={() => setIsJoinModalOpen(false)} />
 
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }

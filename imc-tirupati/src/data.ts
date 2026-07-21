@@ -21,17 +21,17 @@ import image28 from "../assets/28.png";
 import image29 from "../assets/29.png";
 import image30 from "../assets/30.png";
 import image31 from "../assets/31.png";
-import culture from "../assets/culture.avif";
-import connect from "../assets/connect.avif";
-import creator from "../assets/creator.avif";
-import sports from "../assets/sports.avif";
-import women from "../assets/women.avif";
-import startup from "../assets/startup.avif";
-import kids from "../assets/kids.avif";
-import dance from "../assets/dance.avif";
-import music from "../assets/music.avif";
-import nature from "../assets/nature.avif";
-import social from "../assets/social.avif";
+import culture from "../assets/culture.jpeg";
+import connect from "../assets/connect.jpeg";
+import creator from "../assets/creator.jpeg";
+import sports from "../assets/sports.jpeg";
+import women from "../assets/women.jpeg";
+import startup from "../assets/startup.jpeg";
+import kids from "../assets/kids.jpeg";
+import dance from "../assets/dance.jpeg";
+import music from "../assets/music.jpeg";
+import nature from "../assets/nature.jpeg";
+import social from "../assets/social.jpeg";
 
 import event from '../assets/members/Anudeep-event.jpeg';
 import badminton from '../assets/members/Ganesh-badminton.jpeg';
@@ -45,6 +45,13 @@ import book from '../assets/members/Rohitha-book.jpeg';
 import natures from '../assets/members/Tharun-nature.jpeg';
 import cricket from '../assets/members/Uday-cricket.jpeg';
 import kcore from '../assets/members/kushi-core.jpeg';
+import kfounder from '../assets/members/liki-founder.jpeg'
+import ajaydance from '../assets/members/ajaydance.jpeg'
+import sakethpickelball from '../assets/members/sakethpickelball.jpeg'
+import hostmic from '../assets/members/hostmic.jpeg'
+import raveecycle from '../assets/members/raveecycle.jpeg'
+import sohailteam from '../assets/members/sohailteam.jpeg'
+import content from '../assets/members/content.jpeg'
 
 export const WINGS_DATA: Wing[] = [
   {
@@ -128,18 +135,18 @@ export const WINGS_DATA: Wing[] = [
     tagline: "Find peace in the wild.",
     iconName: "TreePine",
     shortIntro: "Eco-stays, trekking, and nature therapy for the urban soul.",
-    detailedDesc: "Escape the concrete jungle. We organize nature-focused getaways, bird watching sessions, and eco-friendly camping trips to the Seshachalam hills and surrounding scenic spots.",
+    detailedDesc: "Escape the concrete jungle. Slow mornings, muddy shoes, and the kind of quiet your phone can’t give you. Meet your tribe — people who’d rather chase a sunrise than a deadline.",
     activities: [
-      {
-        title: "Forest Bathing",
-        description: "Guided silent walks through the hill trails for mental rejuvenation and stress relief.",
-        frequency: "Bi-weekly"
-      },
-      {
-        title: "Eco-Camping",
-        description: "Overnight stays in sustainable camps with star-gazing sessions and bonfire stories.",
-        frequency: "Seasonal"
-      }
+      // {
+      //   title: "Forest Bathing",
+      //   description: "Guided silent walks through the hill trails for mental rejuvenation and stress relief.",
+      //   frequency: "Bi-weekly"
+      // },
+      // {
+      //   title: "Eco-Camping",
+      //   description: "Overnight stays in sustainable camps with star-gazing sessions and bonfire stories.",
+      //   frequency: "Seasonal"
+      // }
     ],
     team: [{ name: "Varun Teja", role: "Expedition Guide" }],
     accentColor: "from-emerald-600 to-green-500",
@@ -419,10 +426,10 @@ export const STATS = [
   { label: "50+ CLUBS", description: "Specialized Communities", icon: "Layers" },
   { label: "700+ EVENTS", description: "Conducted Annually", icon: "Calendar" },
   { label: "40k+ MEMBERS", description: "Active Community", icon: "Users" },
-  { label: "ONE", description: "Heart of Tirupati", icon: "Heart" }
+  { label: "ONE ❤️", description: "One Heart for Tirupati", icon: "Heart" }
 ];
 
-export const localImages = [image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26, image27, image28, image29, image30, image31];
+export const localImages = [image30, image10, image11, image12, image13, image14, image15, image16, image17, image18, image19, image20, image21, image22, image23, image24, image25, image26, image27, image28, image29, image31];
 
 export interface TribeMember {
   name: string;
@@ -431,16 +438,24 @@ export interface TribeMember {
 }
 
 export const TRIBE_MEMBERS: TribeMember[] = [
+  { name: "Likhith. KN", role: "Founder - Strategy & Growth", img: kfounder },
+  { name: "Haasya Vanteru", role: "Head of events & Operations", img: head },
   { name: "Kalyan. TN", role: "Core Team", img: coreteam },
   { name: "Anudeep", role: "Event Design Executive", img: event },
-  { name: "Haasya Vanteru", role: "Head of events & Operations", img: head },
+  { name: "Khushi", role: "Core Team", img: kcore },
+  { name: "Uday", role: "Captain - Cricket Club", img: cricket },
   { name: "Ganesh", role: "Captain - Badminton Club", img: badminton },
   { name: "Neeyati", role: "Captain - Music Community", img: musiccap },
-  { name: "Guru", role: "Captain - Board Games Club", img: boardgame },
   { name: "Rohitha Reddy", role: "Captain - Book Club", img: book },
   { name: "Harshith", role: "Captain - Cue Club", img: cur },
   { name: "Nitheesh", role: "Captain - Volleyball Club", img: volleyball },
   { name: "Tharun Reddy", role: "Captain - Nature Retreat", img: natures },
-  { name: "Uday", role: "Captain - Cricket Club", img: cricket },
-  { name: "Khushi", role: "Core Team", img: kcore },
+  { name: "Guru", role: "Captain - Board Games Club", img: boardgame },
+  { name: "Ajay Varma", role: "Captain - Dance Club", img: ajaydance },
+  { name: "Ajay Varma", role: "Captain - Pickleball", img: sakethpickelball },
+  { name: "Aravind. Jv", role: "Host - Mic.tirupati", img: hostmic },
+  { name: "Ravee", role: "Captain - Cycling Club", img: raveecycle },
+  { name: "Sohail", role: "Organising Team", img: sohailteam },
+  { name: "Nikhila", role: "Content Writer - Mic.tirupati", img: content },
+
 ];

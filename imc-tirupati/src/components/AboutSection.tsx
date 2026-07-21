@@ -136,7 +136,7 @@ export default function AboutSection({ onExploreAbout }: AboutSectionProps) {
                   <Sparkles size={16} className="text-white" />
                 </div>
                 <div className="leading-tight">
-                  <div className="text-lg font-extrabold text-slate-900 dark:text-white font-display">10+ Wings</div>
+                  <div className="text-lg font-extrabold text-slate-900 dark:text-white font-display">50+ Clubs</div>
                   <div className="text-[10px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">One Community</div>
                 </div>
               </motion.div>
@@ -157,11 +157,10 @@ export default function AboutSection({ onExploreAbout }: AboutSectionProps) {
             </div>
 
             <p className="text-lg sm:text-xl text-slate-800 dark:text-slate-200 font-medium leading-relaxed font-sans max-w-2xl">
-              A vibrant, community-driven platform built to bring people together beyond their everyday schedules.
-            </p>
+              IMC Tirupati brings people together beyond the daily grind. Clubs for your interests, weekend trips that actually get you outdoors, workshops that teach you something new, and a community that turns strangers into your people.</p>
 
-            <p className="text-base text-slate-600 dark:text-slate-400 font-light leading-relaxed font-sans max-w-2xl">
-              Through our dedicated interest-based clubs, experiential weekend trips, hands-on masterclasses, and social initiatives, we cultivate open spaces where people freely learn new creative hobbies, exchange unique stories, and nurture authentic, long-term friendships.
+            <p className="text-base text-orange-700 font-semibold leading-relaxed font-sans max-w-2xl">
+              Come for the hobby. Stay for the connections.
             </p>
 
             {/* highlights list */}

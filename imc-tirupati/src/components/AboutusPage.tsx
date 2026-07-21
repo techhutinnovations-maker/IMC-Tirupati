@@ -214,7 +214,7 @@ export default function AboutPage({ onBackToHome, theme, onToggleTheme }: AboutP
                   <div className="flex items-center gap-3 sm:gap-4">
                     <Star className="text-orange-500 shrink-0" size={22} />
                     <div>
-                      <div className="text-2xl sm:text-3xl font-black text-slate-900 mb-1">10+</div>
+                      <div className="text-2xl sm:text-3xl font-black text-slate-900 mb-1">50+</div>
                       <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-400">Interest Clubs</div>
                     </div>
                   </div>

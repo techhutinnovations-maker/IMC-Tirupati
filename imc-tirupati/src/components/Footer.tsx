@@ -91,7 +91,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             </ul>
             <div className="pt-4">
                <p className="text-xs font-bold text-slate-800 dark:text-white uppercase">HQ Address</p>
-               <p className="text-xs text-slate-500 mt-1">Tirupati, 517501</p>
+               <p className="text-xs text-slate-500 mt-1">NGO Colony, Tirupati, 517501</p>
             </div>
           </div>
         </div>

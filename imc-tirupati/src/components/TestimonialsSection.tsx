@@ -159,7 +159,7 @@ export default function TestimonialsSection({ onNavigate }: { onNavigate: (t: st
               ))}
             </div>
             <p className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-widest">
-              Join the 25k+ Movement
+              Join the 40k+ Movement
             </p>
           </div>
 

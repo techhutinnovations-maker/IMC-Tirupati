@@ -19,7 +19,7 @@ import LegalPage from "./components/LegalPage";
 
 import JoinTeamPage from './components/joinTeam'
 import MaintenancePage from "./components/Maintenance";
-import { IS_MAINTENANCE } from "./config/maintenance";
+import { IS_MAINTENANCE } from "./config/Maintenance";
 
 // Define the available views for the App
 type AppView = "home" | "gallery" | "about" | "terms" | "privacy" | "guidelines" | "team";

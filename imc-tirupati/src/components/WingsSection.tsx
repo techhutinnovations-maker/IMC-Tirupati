@@ -33,7 +33,11 @@ const THEMES: Record<string, {
   creator: { color: "from-rose-600 to-orange-500", glow: "rgba(225, 29, 72, 0.15)", border: "border-rose-500/20", bg: "bg-rose-500/5", icon: Camera },
 };
 
-export default function WingsSection() {
+interface WingsSectionProps {
+  onNavigate?: (sectionId: string) => void;
+}
+
+export default function WingsSection({ onNavigate }: WingsSectionProps) {
   const [selectedWingId, setSelectedWingId] = useState(WINGS_DATA[0]?.id || "culture");
   const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -256,7 +260,11 @@ export default function WingsSection() {
         </AnimatePresence>
       </div>
 
-      <CommunityJoinModal isOpen={isJoinModalOpen} onClose={() => setIsJoinModalOpen(false)} />
+      <CommunityJoinModal
+        isOpen={isJoinModalOpen}
+        onClose={() => setIsJoinModalOpen(false)}
+        onNavigateTerms={() => onNavigate?.("terms")}
+      />
 
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }

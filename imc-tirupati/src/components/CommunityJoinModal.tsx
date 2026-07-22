@@ -18,9 +18,10 @@ const LINKTREE_URL = "https://linktr.ee/IMC.Tirupati";
 interface CommunityJoinModalProps {
     isOpen: boolean;
     onClose: () => void;
+    onNavigateTerms?: () => void;
 }
 
-export default function CommunityJoinModal({ isOpen, onClose }: CommunityJoinModalProps) {
+export default function CommunityJoinModal({ isOpen, onClose, onNavigateTerms }: CommunityJoinModalProps) {
     const [modalStep, setModalStep] = useState<"terms" | "details" | "submitting" | "success">("terms");
     const [agreed, setAgreed] = useState(false);
     const [formData, setFormData] = useState({ name: "", email: "", contact: "", profession: "" });
@@ -36,6 +37,12 @@ export default function CommunityJoinModal({ isOpen, onClose }: CommunityJoinMod
     const handleClose = () => {
         resetState();
         onClose();
+    };
+
+    const handleTermsClick = () => {
+        resetState();
+        onClose();
+        onNavigateTerms?.();
     };
 
     const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -118,7 +125,7 @@ export default function CommunityJoinModal({ isOpen, onClose }: CommunityJoinMod
                                 <div className="flex items-center gap-3">
                                     <Sparkles className="text-orange-500" />
                                     <span className="text-orange-500 font-black tracking-widest text-[10px] uppercase">
-                                        Phase 01 — Covenant
+                                        Covenant
                                     </span>
                                 </div>
                                 <h2 className="text-5xl font-black tracking-tighter uppercase leading-[0.9]">
@@ -142,7 +149,15 @@ export default function CommunityJoinModal({ isOpen, onClose }: CommunityJoinMod
                                     ))}
                                 </div>
                                 <p className="text-xs leading-5 text-slate-400 font-medium">
-                                    Please take a moment to read our Terms & Conditions before joining. Your acceptance confirms that you agree to comply with our policies, code of conduct, and community standards.
+                                    Please take a moment to read our{" "}
+                                    <button
+                                        type="button"
+                                        onClick={handleTermsClick}
+                                        className="text-orange-500 underline underline-offset-2 hover:text-orange-400 transition-colors font-bold"
+                                    >
+                                        Terms &amp; Conditions
+                                    </button>{" "}
+                                    before joining. Your acceptance confirms that you agree to comply with our policies, code of conduct, and community standards.
                                 </p>
                                 <label className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl cursor-pointer border border-white/5 group">
                                     <input
@@ -169,7 +184,7 @@ export default function CommunityJoinModal({ isOpen, onClose }: CommunityJoinMod
                             <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handleSubmit} className="space-y-4">
                                 <div className="space-y-2 mb-6">
                                     <h2 className="text-orange-400 font-black tracking-tighter uppercase">Identity.</h2>
-                                    <p className="text-orange-500 text-sm font-medium">Requesting entry into the collective.</p>
+                                    <p className="text-orange-500 text-sm font-medium">Requesting entry into our den.</p>
                                 </div>
 
                                 <div className="space-y-3">

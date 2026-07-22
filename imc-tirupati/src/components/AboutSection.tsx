@@ -1,9 +1,9 @@
 import { motion } from "motion/react";
 import { Instagram, ArrowUpRight, Sparkles } from "lucide-react";
 
-import songs from '../../assets/songs.avif';
-import community from '../../assets/community.avif';
-import sports1 from '../../assets/sports1.avif';
+import songs from '../../assets/about2.jpeg';
+import community from '../../assets/about1.jpeg';
+import sports1 from '../../assets/about3.jpeg';
 
 interface AboutSectionProps {
   onExploreAbout: () => void;

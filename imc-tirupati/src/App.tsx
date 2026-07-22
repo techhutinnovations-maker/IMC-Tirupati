@@ -200,6 +200,7 @@ export default function App() {
         <JoinTeamPage
           theme={theme}
           onBackToHome={() => handleNavigate("home")}
+          onNavigate={handleNavigate}
         />
       ) : (
         /* HOME VIEW */
@@ -219,7 +220,7 @@ export default function App() {
             </section>
 
             <section id="wings">
-              <WingsSection />
+              <WingsSection onNavigate={handleNavigate} />
             </section>
 
             {/* Note: EventsSection is currently commented out in your design */}

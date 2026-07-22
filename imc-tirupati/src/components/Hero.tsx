@@ -82,27 +82,32 @@ export default function Hero({ onNavigate }: HeroProps) {
             </motion.h1>
 
             {/* --- MOBILE ONLY IMAGE PREVIEW (The "Engagement" Fix) --- */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="relative flex lg:hidden justify-center items-center py-8"
-            >
-              <div className="relative w-44 h-56 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 rotate-3 z-10">
-                <img src={heroImage2} className="w-full h-full object-cover" alt="Event 1" />
-              </div>
-              <div className="absolute w-36 h-36 rounded-[2rem] overflow-hidden shadow-xl border-4 border-white dark:border-slate-900 -rotate-12 -translate-x-20 opacity-90">
-                <img src={heroImage3} className="w-full h-full object-cover" alt="Event 2" />
-              </div>
-              {/* Floating mobile tag */}
-              <div className="absolute bottom-4 right-1/2 translate-x-24 z-20 bg-white dark:bg-slate-900 px-3 py-2 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-[10px] font-bold dark:text-white whitespace-nowrap">Join 40k+ members</span>
-              </div>
-            </motion.div>
+            {/* --- MOBILE ONLY IMAGE PREVIEW --- */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ delay: 0.2 }}
+  className="relative flex lg:hidden justify-center items-center py-10 h-[350px]"
+>
+  {/* BACK IMAGE (Left side, slightly lower) */}
+  <div className="absolute w-[140px] h-[200px] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 -rotate-12 -translate-x-20 translate-y-4 z-0">
+    <img src={heroImage2} className="w-full h-full object-cover" alt="Event 2" />
+  </div>
+
+  {/* FRONT IMAGE (Right side, slightly higher) */}
+  <div className="absolute w-[160px] h-[230px] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900 rotate-6 translate-x-16 z-10">
+    <img src={heroImage3} className="w-full h-full object-cover" alt="Event 1" />
+  </div>
+
+  {/* JOIN TAG (Centered properly at the bottom) */}
+  <div className="absolute bottom-4 z-20 bg-white dark:bg-slate-900 px-4 py-2 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 flex items-center gap-2">
+    <span className="relative flex h-2 w-2">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+    </span>
+    <span className="text-[11px] font-bold dark:text-white">Join 40k+ members</span>
+  </div>
+</motion.div>
 
             <motion.p
               initial={{ opacity: 0 }}
@@ -230,7 +235,11 @@ export default function Hero({ onNavigate }: HeroProps) {
         </motion.div>
       </div>
 
-      <CommunityJoinModal isOpen={isJoinModalOpen} onClose={() => setIsJoinModalOpen(false)} />
+      <CommunityJoinModal
+        isOpen={isJoinModalOpen}
+        onClose={() => setIsJoinModalOpen(false)}
+        onNavigateTerms={() => onNavigate("terms")}
+      />
 
       {/* Mobile Scroll Indicator */}
       <motion.div

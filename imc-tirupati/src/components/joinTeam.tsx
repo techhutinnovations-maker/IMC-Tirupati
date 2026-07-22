@@ -14,7 +14,13 @@ import CommunityJoinModal from "./CommunityJoinModal";
 // --- CONFIG ---
 const LATEST_EVENTS_LINK = "https://linktr.ee/IMC.Tirupati";
 
-export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => void }) {
+export default function JoinTeamPage({
+    onBackToHome,
+    onNavigate,
+}: {
+    onBackToHome?: () => void;
+    onNavigate?: (sectionId: string) => void;
+}) {
     const [showModal, setShowModal] = useState(false);
 
     return (
@@ -154,7 +160,11 @@ export default function JoinTeamPage({ onBackToHome }: { onBackToHome?: () => vo
             </section>
 
             {/* --- REGISTRATION MODAL --- */}
-            <CommunityJoinModal isOpen={showModal} onClose={() => setShowModal(false)} />
+            <CommunityJoinModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onNavigateTerms={() => onNavigate?.("terms")}
+            />
         </div>
     );
 }
